@@ -17,6 +17,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     var walkingAvg : Double = 0.0;
     var totalEnergyBurned: Double = 0;
     var totalStepCount : Double = 0.0;
+    var glucoseAverage: Double = 0.0;
     
     @IBOutlet var activityTableView : UITableView!
     @IBOutlet var datePicker : UIDatePicker!
@@ -34,8 +35,11 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.title = "Activity"
         datePicker.addTarget(self, action: #selector(ActivityViewController.datePickerChanged(datePicker:)), for: UIControlEvents.valueChanged)
-
         
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        
+
         var image = UIImage(named: "User.png")
         
         image = image?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
@@ -59,7 +63,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    
     
     
     func datePickerChanged(datePicker:UIDatePicker){
@@ -121,10 +124,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 
                 self.totalStepCount = currentStepCount
-            }
-            
-            DispatchQueue.main.async { [unowned self] in
-                self.activityTableView.reloadData()
+                self.getGlucoseData(forDate: forDate)
+
             }
             
             //Kkeep workouts and refresh tableview in main thread
@@ -133,7 +134,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getTotalCalorieBurned(forDate: Date) {
-        healthManager.readCalorieBurned({ (results, error) -> Void in
+        healthManager.readCalorieBurned(forDate: self.datePicked, { (results, error) -> Void in
             if( error != nil )
             {
                 print("Error reading workouts: \(error?.localizedDescription)")
@@ -182,39 +183,92 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         _ = segue.destination as! UserProfileViewController
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Today"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityVCCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityVCCell", for: indexPath) as! ActivityTrackCell
+        
+        cell.layer.cornerRadius = 15;
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = "WalkingRunningDistance";
-            cell.detailTextLabel?.text = "\(self.walkingAvg)"
+            cell.activityTypeLabel?.text = "WalkingRunningDistance";
+            cell.activityTypleValue?.text = "\(self.walkingAvg)"
         }else if indexPath.row == 1{
-            cell.textLabel?.text = "StepCount";
-            cell.detailTextLabel?.text = "\(self.totalStepCount)"
+            cell.activityTypeLabel?.text = "StepCount";
+            cell.activityTypleValue?.text = "\(self.totalStepCount)"
         }else if indexPath.row == 2{
-            cell.textLabel?.text = "CaloriesBurned";
-            cell.detailTextLabel?.text = "\(self.totalEnergyBurned)"
+            cell.activityTypeLabel?.text = "CaloriesBurned";
+            cell.activityTypleValue?.text = "\(self.totalEnergyBurned)"
             
+        }else if indexPath.row == 3{
+            cell.activityTypeLabel?.text = "GlucoseAverage";
+            cell.activityTypleValue?.text = "\(self.glucoseAverage)"
         }
         return cell;
     }
     
+    func getGlucoseData(forDate: Date) {
+        healthManager.readGlucoseSamples(forDate: forDate, { (results, error) -> Void in
+            if( error != nil )
+            {
+                print("Error reading workouts: \(error?.localizedDescription)")
+                return;
+            }
+            else
+            {
+                
+                var glucoseSamples : Double = 0.0;
+                
+                let gramUnit = HKUnit.gram()
+                let volumeUnit = HKUnit.literUnit(with: .deci)
+                let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
+                
+                for aSample in results! {
+                    glucoseSamples += aSample.quantity.doubleValue(for: glucoseUnit)
+                }
+                
+                self.glucoseAverage = glucoseSamples/Double((results?.count)!)
+            }
+            
+            DispatchQueue.main.async { [unowned self] in
+                self.activityTableView.reloadData()
+            }
+            
+            //Kkeep workouts and refresh tableview in main thread
+            
+        })
+    }
 }
 
 extension DateFormatter {
-    
     func stringFromDate(date : Date) -> String{
         
         self.dateFormat = "yyyy-MM-ddHH:mm:ss";
         self.timeZone = TimeZone(abbreviation : "UTC")
          let dateString = self.string(from: date)
-        
         return dateString;
     }
-    
+}
+
+extension Date {
+    func midNightDate() -> Date {
+        let cal = Calendar(identifier: .gregorian)
+        let newDate = cal.startOfDay(for: self)
+        return newDate
+    }
 }

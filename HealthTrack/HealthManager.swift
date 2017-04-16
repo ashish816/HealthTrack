@@ -26,6 +26,7 @@ class HealthManager: NSObject {
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!,
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!,
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodGlucose)!,
             HKObjectType.workoutType()
         ]
         
@@ -34,6 +35,7 @@ class HealthManager: NSObject {
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMassIndex)!,
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
             HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!,
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bloodGlucose)!,
             HKQuantityType.workoutType()
         ]
         
@@ -61,12 +63,14 @@ class HealthManager: NSObject {
     func readRunningWorkOuts(forDate : Date?,_ completion: (([AnyObject]?, NSError?) -> Void)!) {
         
         
-        let startDate = forDate != nil ? forDate! : Date();
+        let chosenDate = forDate != nil ? forDate! : Date();
         
+        let startDate = chosenDate.midNightDate()
+
 //        let startDate = Date()
-        let endDate = startDate.addingTimeInterval(-24*60*60)
+        let endDate = startDate.addingTimeInterval(24*60*60)
         
-        let predicate = HKQuery.predicateForSamples(withStart: endDate as Date, end: startDate as Date, options: [.strictStartDate])
+        let predicate = HKQuery.predicateForSamples(withStart: startDate as Date, end: endDate as Date, options: [.strictStartDate])
         let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
         
@@ -92,12 +96,14 @@ class HealthManager: NSObject {
         
     }
     
-    func readCalorieBurned(_ completion: (([AnyObject]?, NSError?) -> Void)!) {
+    func readCalorieBurned(forDate : Date?,_ completion: (([AnyObject]?, NSError?) -> Void)!) {
         
-        let startDate = Date()
-        let endDate = startDate.addingTimeInterval(-24*60*60)
+        let chosenDate = forDate != nil ? forDate! : Date();
         
-        let predicate = HKQuery.predicateForSamples(withStart: endDate as Date, end: startDate as Date, options: [.strictStartDate])
+        let startDate = chosenDate.midNightDate()
+        let endDate = startDate.addingTimeInterval(24*60*60)
+        
+         let predicate = HKQuery.predicateForSamples(withStart: startDate as Date, end: endDate as Date, options: [.strictStartDate])
         let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
         
@@ -124,11 +130,12 @@ class HealthManager: NSObject {
     
     func readStepCount(forDate : Date?,_ completion: (([AnyObject]?, NSError?) -> Void)!) {
         
-        let startDate = forDate != nil ? forDate! : Date();
-//        let startDate = Date()
-        let endDate = startDate.addingTimeInterval(-24*60*60)
+        let chosenDate = forDate != nil ? forDate! : Date();
         
-        let predicate = HKQuery.predicateForSamples(withStart: endDate as Date, end: startDate as Date, options: [.strictStartDate])
+        let startDate = chosenDate.midNightDate()//        let startDate = Date()
+        let endDate = startDate.addingTimeInterval(24*60*60)
+        
+         let predicate = HKQuery.predicateForSamples(withStart: startDate as Date, end: endDate as Date, options: [.strictStartDate])
         let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
         let stepsCount = HKQuantityType.quantityType(
@@ -145,6 +152,46 @@ class HealthManager: NSObject {
                 
                 completion?(results,error as NSError?);
 
+            }
+        }
+        
+        // Don't forget to execute the Query!
+        healthKitStore.execute(stepsSampleQuery)
+        
+    }
+    
+    func readGlucoseSamples(forDate : Date?,_ completion: (([AnyObject]?, NSError?) -> Void)!) {
+        
+        
+        
+        let chosenDate = forDate != nil ? forDate! : Date();
+        
+        print(chosenDate);
+        
+        let startDate = chosenDate.midNightDate()
+        
+        print(chosenDate);
+
+        //        let startDate = Date()
+        let endDate = startDate.addingTimeInterval(24*60*60)
+        
+         let predicate = HKQuery.predicateForSamples(withStart: startDate as Date, end: endDate as Date, options: [.strictStartDate])
+        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
+        
+        let stepsCount = HKQuantityType.quantityType(
+            forIdentifier: HKQuantityTypeIdentifier.bloodGlucose)
+        
+        var totalStepCount : Double = 0;
+        
+        let stepsSampleQuery = HKSampleQuery(sampleType: stepsCount!,
+                                             predicate: predicate,
+                                             limit: HKObjectQueryNoLimit,
+                                             sortDescriptors: [sortDescriptor])
+        { [unowned self] (query, results, error) in
+            if let results = results as? [HKQuantitySample] {
+                
+                completion?(results,error as NSError?);
+                
             }
         }
         

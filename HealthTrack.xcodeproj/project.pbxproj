@@ -15,6 +15,9 @@
 		753A0A831E639F020002053C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753A0A821E639F020002053C /* Assets.xcassets */; };
 		753A0A861E639F020002053C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753A0A841E639F020002053C /* LaunchScreen.storyboard */; };
 		753A0A901E63A4B90002053C /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753A0A8F1E63A4B90002053C /* HealthKit.framework */; };
+		756315F61EA17F76007434BF /* DetailActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756315F51EA17F76007434BF /* DetailActivityViewController.swift */; };
+		756315F81EA1826B007434BF /* ActivityTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756315F71EA1826B007434BF /* ActivityTrackCell.swift */; };
+		756315FA1EA3EC2F007434BF /* MedicationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756315F91EA3EC2F007434BF /* MedicationSample.swift */; };
 		756927901E74081700F0D0E1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569278F1E74081700F0D0E1 /* ActivityViewController.swift */; };
 		756927921E740A1C00F0D0E1 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756927911E740A1C00F0D0E1 /* UserProfileViewController.swift */; };
 		75E1061E1E68F39B004381B2 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E1061D1E68F39B004381B2 /* HealthManager.swift */; };
@@ -38,6 +41,9 @@
 		753A0A871E639F020002053C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753A0A8D1E63A4B90002053C /* HealthTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthTrack.entitlements; sourceTree = "<group>"; };
 		753A0A8F1E63A4B90002053C /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		756315F51EA17F76007434BF /* DetailActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailActivityViewController.swift; sourceTree = "<group>"; };
+		756315F71EA1826B007434BF /* ActivityTrackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTrackCell.swift; sourceTree = "<group>"; };
+		756315F91EA3EC2F007434BF /* MedicationSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationSample.swift; sourceTree = "<group>"; };
 		7569278F1E74081700F0D0E1 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		756927911E740A1C00F0D0E1 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		75E1061D1E68F39B004381B2 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
@@ -70,6 +76,7 @@
 		753A0A6F1E639F020002053C = {
 			isa = PBXGroup;
 			children = (
+				756315F91EA3EC2F007434BF /* MedicationSample.swift */,
 				753A0A7A1E639F020002053C /* HealthTrack */,
 				753A0A791E639F020002053C /* Products */,
 				753A0A8E1E63A4B90002053C /* Frameworks */,
@@ -102,6 +109,8 @@
 				753037371E7B020A00F5C5C9 /* GlucoseUpdateViewController.swift */,
 				75F679751E9B62B200915C1C /* MedicationViewController.swift */,
 				75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */,
+				756315F51EA17F76007434BF /* DetailActivityViewController.swift */,
+				756315F71EA1826B007434BF /* ActivityTrackCell.swift */,
 			);
 			path = HealthTrack;
 			sourceTree = "<group>";
@@ -249,11 +258,14 @@
 				756927921E740A1C00F0D0E1 /* UserProfileViewController.swift in Sources */,
 				753037381E7B020A00F5C5C9 /* GlucoseUpdateViewController.swift in Sources */,
 				75F679761E9B62B200915C1C /* MedicationViewController.swift in Sources */,
+				756315FA1EA3EC2F007434BF /* MedicationSample.swift in Sources */,
 				75F679781E9B62F800915C1C /* CalorieIntakeViewController.swift in Sources */,
 				753A0A7E1E639F020002053C /* ViewController.swift in Sources */,
 				75E1061E1E68F39B004381B2 /* HealthManager.swift in Sources */,
 				756927901E74081700F0D0E1 /* ActivityViewController.swift in Sources */,
+				756315F61EA17F76007434BF /* DetailActivityViewController.swift in Sources */,
 				753A0A7C1E639F020002053C /* AppDelegate.swift in Sources */,
+				756315F81EA1826B007434BF /* ActivityTrackCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
