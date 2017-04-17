@@ -4,5 +4,5 @@ use_frameworks!
 
 target ‘HealthTrack’ do
     pod 'Alamofire', '~> 4.4'
-    pod 'CVCalendar', '~> 1.5.0'
+    pod 'FSCalendar'
 end

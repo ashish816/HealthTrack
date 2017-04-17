@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CVCalendar.xcscheme</key>
+		<key>FSCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,7 +22,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1096650E480CDD6CD389DB099202FD92</key>
+		<key>58F8527E74F83232A1EF0C9675CF627E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F5B9E3213AAFBCCFC4D76851E09C943E</key>
+		<key>CE3298D6321CEA84AD22A6A4E36E7B16</key>
 		<dict>
 			<key>primary</key>
 			<true/>

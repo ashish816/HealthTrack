@@ -8,10 +8,10 @@
 
 import UIKit
 import HealthKit
-import CVCalendar
 import Alamofire
+import FSCalendar
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource{
     
     let healthManager = HealthManager()
     var walkingAvg : Double = 0.0;
@@ -23,9 +23,10 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var datePicker : UIDatePicker!
     @IBOutlet var datePickerButton : UIButton!
     
-    @IBOutlet weak var menuView: CVCalendarMenuView!
-    @IBOutlet weak var calendarView: CVCalendarView!
-        
+    @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var calendar: FSCalendar!
+
+
     var datePicked : Date?
 
     override func viewDidLoad() {
@@ -39,6 +40,10 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
         
+        self.calendar.select(Date())
+        self.calendar.scope = .week
+        self.calendar.setScope(.week, animated: true)
+        self.calendarHeightConstraint.constant = 200
 
         var image = UIImage(named: "User.png")
         
@@ -65,20 +70,29 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        self.calendarHeightConstraint.constant = bounds.height
+        self.view.layoutIfNeeded()
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+        self.datePicked = date
+        self.getTotalRunningData(forDate: self.datePicked!)
+        self.datePicker.isHidden = true
+        
+    }
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+//        print("\(self.dateFormatter.string(from: calendar.currentPage))")
+    }
+    
+    
     func datePickerChanged(datePicker:UIDatePicker){
         
-        self.datePicked = datePicker.date
-        self.getTotalRunningData(forDate: self.datePicked!)
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-//        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-//        let cal = NSCalendar.currentCalendar()
-//        comp = cal.components([.Era, .Day, .Month, .Year, .Hour, .Minute] , fromDate: datePicker.date)
-//        
-//        // getting day, month, year ect
-//        print ("Era:\(comp.era) Date:\(comp.day) Month:\(comp.month) Month:\(comp.year) Hours: \(comp.hour) Minuts:\(comp.minute)")
-        
-        self.datePicker.isHidden = true
+//        self.datePicked = datePicker.date
+//        self.getTotalRunningData(forDate: self.datePicked!)
+//        self.datePicker.isHidden = true
     }
     
     func getTotalRunningData(forDate: Date){

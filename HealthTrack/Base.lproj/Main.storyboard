@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Activity View Controller-->
+        <!--Data Source-->
         <scene sceneID="wMq-QD-QF3">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="5gf-Yf-xzP" customClass="ActivityViewController" customModule="HealthTrack" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,8 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="v5t-k9-QQ9">
-                                <rect key="frame" x="0.0" y="125" width="375" height="493"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="v5t-k9-QQ9">
+                                <rect key="frame" x="0.0" y="171" width="375" height="447"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityVCCell" rowHeight="100" id="gcO-ye-mWX" customClass="ActivityTrackCell" customModule="HealthTrack" customModuleProvider="target">
@@ -74,41 +74,37 @@
                                     <!--2017-04-01 07:03:14 +0000-->
                                 </date>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2g0-Bj-0oW">
-                                <rect key="frame" x="0.0" y="84" width="258" height="33"/>
-                                <state key="normal" title="Choose Date"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyD-6u-Z5g" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="64" width="375" height="99"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="99" id="Srz-lU-SZt"/>
+                                </constraints>
                                 <connections>
-                                    <action selector="openDatePickerWithId:" destination="5gf-Yf-xzP" eventType="touchUpInside" id="ok1-fv-c8V"/>
+                                    <outlet property="dataSource" destination="5gf-Yf-xzP" id="lUe-7d-DL9"/>
+                                    <outlet property="delegate" destination="5gf-Yf-xzP" id="G0Q-F1-NSM"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPF-n7-Syw">
-                                <rect key="frame" x="291" y="84" width="34" height="30"/>
-                                <state key="normal" title="Sync"/>
-                                <connections>
-                                    <action selector="syncDataToServer" destination="5gf-Yf-xzP" eventType="touchUpInside" id="Z2t-EE-oRW"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="v5t-k9-QQ9" secondAttribute="trailing" id="3i1-XK-Bp0"/>
                             <constraint firstItem="Hvp-OK-abE" firstAttribute="top" secondItem="fM6-qJ-LWA" secondAttribute="bottom" constant="4" id="48J-dO-hh8"/>
-                            <constraint firstItem="2g0-Bj-0oW" firstAttribute="top" secondItem="Krv-wL-7lp" secondAttribute="bottom" constant="20" id="9Vv-j6-291"/>
                             <constraint firstAttribute="trailing" secondItem="fM6-qJ-LWA" secondAttribute="trailing" id="NKs-ON-C0Z"/>
-                            <constraint firstItem="IPF-n7-Syw" firstAttribute="top" secondItem="Krv-wL-7lp" secondAttribute="bottom" constant="20" id="Qkc-t0-db5"/>
-                            <constraint firstItem="v5t-k9-QQ9" firstAttribute="top" secondItem="2g0-Bj-0oW" secondAttribute="bottom" constant="28" id="TbU-5y-jtl"/>
                             <constraint firstItem="v5t-k9-QQ9" firstAttribute="leading" secondItem="fBe-Yc-3wh" secondAttribute="leading" id="YiW-Oq-AQI"/>
                             <constraint firstItem="Hvp-OK-abE" firstAttribute="top" secondItem="v5t-k9-QQ9" secondAttribute="bottom" id="cLA-0k-o71"/>
-                            <constraint firstItem="IPF-n7-Syw" firstAttribute="leading" secondItem="2g0-Bj-0oW" secondAttribute="trailing" constant="33" id="fKx-Qp-7Ma"/>
-                            <constraint firstItem="2g0-Bj-0oW" firstAttribute="leading" secondItem="fBe-Yc-3wh" secondAttribute="leading" id="jZv-wl-jsG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IPF-n7-Syw" secondAttribute="trailing" constant="34" id="r6a-R3-3CB"/>
-                            <constraint firstItem="v5t-k9-QQ9" firstAttribute="top" secondItem="IPF-n7-Syw" secondAttribute="bottom" constant="31" id="uRy-J6-CQD"/>
+                            <constraint firstItem="v5t-k9-QQ9" firstAttribute="top" secondItem="JyD-6u-Z5g" secondAttribute="bottom" priority="750" constant="8" id="gHX-2Y-0BQ"/>
+                            <constraint firstItem="JyD-6u-Z5g" firstAttribute="top" secondItem="Krv-wL-7lp" secondAttribute="bottom" id="ixL-w4-woV"/>
+                            <constraint firstAttribute="trailing" secondItem="JyD-6u-Z5g" secondAttribute="trailing" id="mBR-gK-g66"/>
                             <constraint firstItem="fM6-qJ-LWA" firstAttribute="leading" secondItem="fBe-Yc-3wh" secondAttribute="leading" id="vHH-BX-31s"/>
+                            <constraint firstItem="JyD-6u-Z5g" firstAttribute="leading" secondItem="fBe-Yc-3wh" secondAttribute="leading" id="zkB-9i-mQ9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2cB-z0-P78"/>
                     <connections>
                         <outlet property="activityTableView" destination="v5t-k9-QQ9" id="2AW-xM-Sfo"/>
+                        <outlet property="calendar" destination="JyD-6u-Z5g" id="kM8-Vu-3hD"/>
+                        <outlet property="calendarHeightConstraint" destination="Srz-lU-SZt" id="FGt-gN-wgx"/>
                         <outlet property="datePicker" destination="fM6-qJ-LWA" id="XTD-cv-Y3c"/>
                         <segue destination="mNC-k0-0hS" kind="presentation" identifier="ToUserProfile" id="RUT-le-mda"/>
                     </connections>
