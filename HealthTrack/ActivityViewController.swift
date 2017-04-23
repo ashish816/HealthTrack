@@ -26,6 +26,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var calendar: FSCalendar!
 
+    var runningWalkingSample = [HKQuantitySample]()
+    var stepCountSample = [HKQuantitySample]()
+    var glucoseSample = [HKQuantitySample]()
 
     var datePicked : Date?
 
@@ -33,6 +36,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         self.authorizeHealthkit();
+        
+        self.activityTableView.separatorInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
+        self.activityTableView.layer.shadowRadius = 15;
         
         self.title = "Activity"
         datePicker.addTarget(self, action: #selector(ActivityViewController.datePickerChanged(datePicker:)), for: UIControlEvents.valueChanged)
@@ -106,6 +112,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             {
                 var totalWalingForTheDay : Double=0.0;
                 
+                self.runningWalkingSample = results as! [HKQuantitySample]
+                
                 for aSample in results! {
                     
                     let workOutSample = aSample as! HKQuantitySample
@@ -132,7 +140,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             {
                 
                 var currentStepCount : Double = 0.0;
-                
+                self.stepCountSample = results as! [HKQuantitySample]
+
                 for aSample in results! {
                     currentStepCount += aSample.quantity.doubleValue(for: HKUnit.count())
                 }
@@ -194,7 +203,29 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        _ = segue.destination as! UserProfileViewController
+        
+        if segue.identifier == "ActivityToDetailActivity" {
+            let destination = segue.destination as! DetailActivityViewController
+            let indexPath = sender as! IndexPath
+            if indexPath.row == 0{
+                destination.detailActivitySamples = self.runningWalkingSample
+                destination.currentDetailSampelType = .RunningType
+            }else if indexPath.row == 1{
+                destination.detailActivitySamples = self.stepCountSample
+                destination.currentDetailSampelType = .StepCountType
+
+            }else if indexPath.row == 2{
+                
+            }else if indexPath.row == 3{
+                destination.detailActivitySamples = self.glucoseSample
+                destination.currentDetailSampelType = .GlucoseType
+            }
+            
+        }else{
+            _ = segue.destination as! UserProfileViewController
+ 
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -217,7 +248,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityVCCell", for: indexPath) as! ActivityTrackCell
         
-        cell.layer.cornerRadius = 15;
+        cell.layer.cornerRadius = 10;
+        cell.separatorInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
+
         
         if indexPath.row == 0 {
             cell.activityTypeLabel?.text = "WalkingRunningDistance";
@@ -236,6 +269,12 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         return cell;
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+        self.performSegue(withIdentifier: "ActivityToDetailActivity", sender: indexPath)
+    }
+    
     func getGlucoseData(forDate: Date) {
         healthManager.readGlucoseSamples(forDate: forDate, { (results, error) -> Void in
             if( error != nil )
@@ -245,6 +284,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
             else
             {
+                
+                self.glucoseSample = results as! [HKQuantitySample]
                 
                 var glucoseSamples : Double = 0.0;
                 
@@ -263,10 +304,10 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 self.activityTableView.reloadData()
             }
             
-            //Kkeep workouts and refresh tableview in main thread
             
         })
     }
+    
 }
 
 extension DateFormatter {

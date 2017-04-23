@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CircularSlider.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FSCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE3298D6321CEA84AD22A6A4E36E7B16</key>
+		<key>A2BA22AE8AD9D5BED203B7E7F707289D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DCDFD7EC0311098D54061315F3BBC4D3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -8,8 +8,10 @@
 
 import UIKit
 import HealthKit
+import CircularSlider
 
-class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+
+class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate,CircularSliderDelegate {
     
     @IBOutlet var pickerView : UIPickerView!
     @IBOutlet var textArea : UITextField!
@@ -22,6 +24,9 @@ class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIP
     var datePicked : Date?
     var currentGlucoseValue : String?
     
+    @IBOutlet weak var circularSlider: CircularSlider!
+
+    
     @IBOutlet var datePicker : UIDatePicker!
     
     var healthManager = HealthManager()
@@ -32,7 +37,15 @@ class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIP
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         
+        setupCircularSlider()
+
+        
         datePicker.addTarget(self, action: #selector(ActivityViewController.datePickerChanged(datePicker:)), for: UIControlEvents.valueChanged)
+    }
+    
+    // MARK: - methods
+    fileprivate func setupCircularSlider() {
+        circularSlider.delegate = self as! CircularSliderDelegate
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -122,4 +135,10 @@ class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIP
         })
     }
     
+    func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
+        self.currentGlucoseValue = "\(floorf(value))"
+        return floorf(value)
+    }
+    
 }
+

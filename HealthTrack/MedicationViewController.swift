@@ -38,13 +38,11 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func createNotificationsForMedicine(){
         let content = UNMutableNotificationContent()
-        content.title = "Don't forget"
-        content.body = "Buy some milk"
+        content.title = "Medicine Name"
+        content.body = "Its time to take your Medicine"
         content.sound = UNNotificationSound.default()
         
         let date = Date()
-//        let midnightDate = date.midNightDate()
-//        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
         
         let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second,], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
