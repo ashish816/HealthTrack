@@ -1,18 +1,18 @@
 //
-//  CalorieIntakeViewController.swift
+//  WorkOutUpdateViewController.swift
 //  HealthTrack
 //
-//  Created by Ashish Mishra on 4/9/17.
+//  Created by Ashish Mishra on 4/24/17.
 //  Copyright © 2017 Ashish Mishra. All rights reserved.
 //
 
 import UIKit
-import CircularSlider
+import  CircularSlider
+class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
 
-class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
     
     var datePicked : Date?
-    var calorieIntakeValue : String?
+    var workOutCalorieBurned : String?
     
     @IBOutlet weak var circularSlider: CircularSlider!
     @IBOutlet var datePicker : UIDatePicker!
@@ -42,18 +42,16 @@ class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
         self.datePicker.isHidden = true
     }
     
-    @IBAction func saveCalorieIntake(){
-        
+    @IBAction func saveWorkout(){
         
     }
     
-    func saveCalorieIntakeToserver() {
+    func saveWorkoutToserver() {
         
     }
     
     func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
-        self.calorieIntakeValue = "\(floorf(value))"
+        self.workOutCalorieBurned = "\(floorf(value))"
         return floorf(value)
     }
-    
 }

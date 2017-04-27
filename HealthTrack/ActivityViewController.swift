@@ -302,12 +302,62 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             
             DispatchQueue.main.async { [unowned self] in
                 self.activityTableView.reloadData()
+                self.storeValuesToServer()
             }
-            
             
         })
     }
     
+    func storeValuesToServer() {
+        
+//        let parameters : Parameters = ["patientId" : 111, "name" : "ashish Mishra" , "age" : 28]
+//        Alamofire.request("http://10.0.0.117:3000/patient/activites", method: .post, parameters: parameters, encoding: JSONEncoding.default).response { (response) in
+//            print(response)
+//            
+//        }
+        
+        self.syncAtcivityForCurrentDate()
+        self.syncGlucoseDataForCurrentDate()
+    }
+    
+    func syncAtcivityForCurrentDate() {
+        
+        let activityDic = ["WalkingRunningDistance" : self.walkingAvg, "StepCount" : self.totalStepCount , "Date" : self.datePicked?.iso8601] as [String : Any]
+        
+        let activityArray = [activityDic];
+        
+        let activityData : Parameters = ["patientId" : 111, "activity" : activityArray]
+        Alamofire.request("http://10.0.0.117:9000/patient/activites", method: .post, parameters: activityData, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+        }
+    }
+    
+    func syncGlucoseDataForCurrentDate() {
+        
+        
+        var chosenDateGlucoseSampels = [Any]()
+        
+        let gramUnit = HKUnit.gram()
+        let volumeUnit = HKUnit.literUnit(with: .deci)
+        let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
+        
+        for aSample in self.glucoseSample {
+        
+            let timeSample = ["time" : aSample.startDate.iso8601 , "value" : aSample.quantity
+                .doubleValue(for: glucoseUnit)] as [String : Any]
+            
+            chosenDateGlucoseSampels.append(timeSample)
+            
+        }
+
+        let glucoseData : Parameters = ["patientId" : 111,"unit" : "mg/dL", "ObservationDate": self.datePicked?.iso8601 , "glucose": chosenDateGlucoseSampels]
+        Alamofire.request("http://10.0.0.117:9000/patient/glucose", method: .post, parameters: glucoseData, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+        }
+        
+    }
 }
 
 extension DateFormatter {
@@ -318,6 +368,13 @@ extension DateFormatter {
          let dateString = self.string(from: date)
         return dateString;
     }
+    
+    func stringFromDateWithCurrentTimeZone(date : Date) -> String {
+        self.dateFormat = "YYYY-MM-DDTHH:mm:ss.sssZ";
+        self.timeZone = TimeZone.current
+        let dateString = self.string(from: date)
+        return dateString;
+    }
 }
 
 extension Date {
@@ -325,5 +382,27 @@ extension Date {
         let cal = Calendar(identifier: .gregorian)
         let newDate = cal.startOfDay(for: self)
         return newDate
+    }
+}
+
+extension Formatter {
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
+}
+extension Date {
+    var iso8601: String {
+        return Formatter.iso8601.string(from: self)
+    }
+}
+
+extension String {
+    var dateFromISO8601: Date? {
+        return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
     }
 }

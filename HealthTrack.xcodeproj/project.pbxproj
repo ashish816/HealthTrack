@@ -21,6 +21,8 @@
 		756315FC1EA6F8FC007434BF /* DetailActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756315FB1EA6F8FC007434BF /* DetailActivityCell.swift */; };
 		756927901E74081700F0D0E1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569278F1E74081700F0D0E1 /* ActivityViewController.swift */; };
 		756927921E740A1C00F0D0E1 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756927911E740A1C00F0D0E1 /* UserProfileViewController.swift */; };
+		7588A53D1EAEC58A0079AD5E /* Pizza Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7588A53C1EAEC58A0079AD5E /* Pizza Filled-50.png */; };
+		7588A53F1EAECAD70079AD5E /* WorkOutUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7588A53E1EAECAD70079AD5E /* WorkOutUpdateViewController.swift */; };
 		75E1061E1E68F39B004381B2 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E1061D1E68F39B004381B2 /* HealthManager.swift */; };
 		75F679761E9B62B200915C1C /* MedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F679751E9B62B200915C1C /* MedicationViewController.swift */; };
 		75F679781E9B62F800915C1C /* CalorieIntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */; };
@@ -48,6 +50,8 @@
 		756315FB1EA6F8FC007434BF /* DetailActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailActivityCell.swift; sourceTree = "<group>"; };
 		7569278F1E74081700F0D0E1 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		756927911E740A1C00F0D0E1 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		7588A53C1EAEC58A0079AD5E /* Pizza Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pizza Filled-50.png"; sourceTree = "<group>"; };
+		7588A53E1EAECAD70079AD5E /* WorkOutUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkOutUpdateViewController.swift; sourceTree = "<group>"; };
 		75E1061D1E68F39B004381B2 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		75F679751E9B62B200915C1C /* MedicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationViewController.swift; sourceTree = "<group>"; };
 		75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieIntakeViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 				753A0A7D1E639F020002053C /* ViewController.swift */,
 				753A0A7F1E639F020002053C /* Main.storyboard */,
 				753A0A821E639F020002053C /* Assets.xcassets */,
+				7588A53C1EAEC58A0079AD5E /* Pizza Filled-50.png */,
 				753A0A841E639F020002053C /* LaunchScreen.storyboard */,
 				753A0A871E639F020002053C /* Info.plist */,
 				75E1061D1E68F39B004381B2 /* HealthManager.swift */,
@@ -114,6 +119,7 @@
 				756315F51EA17F76007434BF /* DetailActivityViewController.swift */,
 				756315F71EA1826B007434BF /* ActivityTrackCell.swift */,
 				756315FB1EA6F8FC007434BF /* DetailActivityCell.swift */,
+				7588A53E1EAECAD70079AD5E /* WorkOutUpdateViewController.swift */,
 			);
 			path = HealthTrack;
 			sourceTree = "<group>";
@@ -198,6 +204,7 @@
 			files = (
 				753A0A861E639F020002053C /* LaunchScreen.storyboard in Resources */,
 				753A0A831E639F020002053C /* Assets.xcassets in Resources */,
+				7588A53D1EAEC58A0079AD5E /* Pizza Filled-50.png in Resources */,
 				753A0A811E639F020002053C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +277,7 @@
 				756315F61EA17F76007434BF /* DetailActivityViewController.swift in Sources */,
 				753A0A7C1E639F020002053C /* AppDelegate.swift in Sources */,
 				756315F81EA1826B007434BF /* ActivityTrackCell.swift in Sources */,
+				7588A53F1EAECAD70079AD5E /* WorkOutUpdateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +401,7 @@
 			baseConfigurationReference = 0903B46621871A0B929A3439 /* Pods-HealthTrack.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = HealthTrack/HealthTrack.entitlements;
 				DEVELOPMENT_TEAM = DVT26A466Y;
 				INFOPLIST_FILE = HealthTrack/Info.plist;
@@ -409,6 +418,7 @@
 			baseConfigurationReference = 1AFC86BA505E516E8E8CE81B /* Pods-HealthTrack.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = HealthTrack/HealthTrack.entitlements;
 				DEVELOPMENT_TEAM = DVT26A466Y;
 				INFOPLIST_FILE = HealthTrack/Info.plist;

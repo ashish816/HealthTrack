@@ -11,22 +11,12 @@ import HealthKit
 import CircularSlider
 
 
-class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate,CircularSliderDelegate {
-    
-    @IBOutlet var pickerView : UIPickerView!
-    @IBOutlet var textArea : UITextField!
-    
-    var prePostString : String?
-    var MealType : String?
-//    var timings = ["Pre", "Post"];
-//    var sections = ["Breakfast", "Lunch", "Dinner","Snacks" ];
+class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
     
     var datePicked : Date?
     var currentGlucoseValue : String?
     
     @IBOutlet weak var circularSlider: CircularSlider!
-
-    
     @IBOutlet var datePicker : UIDatePicker!
     
     var healthManager = HealthManager()
@@ -34,62 +24,15 @@ class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Glucose Update"
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
         
         setupCircularSlider()
 
-        
         datePicker.addTarget(self, action: #selector(ActivityViewController.datePickerChanged(datePicker:)), for: UIControlEvents.valueChanged)
     }
     
     // MARK: - methods
     fileprivate func setupCircularSlider() {
         circularSlider.delegate = self as! CircularSliderDelegate
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-          return 2
-        } else {
-           return 4
-        }
-    }
-    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if component == 0 {
-//            return timings[row]
-//        } else {
-//            return sections[row]
-//        }
-//    }
-//    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if component == 0 {
-//           self.prePostString = self.timings[row]
-//        }else {
-//            self.MealType = self.sections[row]
-//        }
-//        self.pickerView.isHidden = true
-//    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.textArea = textField;
-        
-        return true;
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textArea.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.currentGlucoseValue = textField.text
     }
     
     @IBAction func chooseReadingTIme() {
@@ -104,8 +47,6 @@ class GlucoseUpdateViewController: UIViewController, UIPickerViewDataSource, UIP
     }
     
     @IBAction func saveGlucoseValue(){
-        
-        self.textArea.resignFirstResponder()
         
         let glucoseVale = Double(self.currentGlucoseValue!)
         self.saveGlucoseSample(glucose: glucoseVale!,date: self.datePicked!)

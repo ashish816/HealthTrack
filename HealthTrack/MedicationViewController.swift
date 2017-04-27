@@ -50,7 +50,6 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let center = UNUserNotificationCenter.current()
 
-        
         let identifier = "UYLMedication"
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content, trigger: trigger)
