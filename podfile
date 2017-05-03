@@ -6,4 +6,5 @@ target ‘HealthTrack’ do
     pod 'Alamofire', '~> 4.4'
     pod 'FSCalendar'
     pod 'CircularSlider'
+    pod 'Charts' 
 end

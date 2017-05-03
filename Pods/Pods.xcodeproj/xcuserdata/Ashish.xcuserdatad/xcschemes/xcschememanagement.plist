@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Charts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CircularSlider.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,6 +32,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>07C004EE9675A950E771D1109A09AE79</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>58F8527E74F83232A1EF0C9675CF627E</key>
 		<dict>
 			<key>primary</key>
@@ -42,7 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DCDFD7EC0311098D54061315F3BBC4D3</key>
+		<key>F1F595BD0CE2688C4FF7CE38B8A8B7DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

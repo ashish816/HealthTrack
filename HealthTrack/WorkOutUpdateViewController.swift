@@ -8,6 +8,9 @@
 
 import UIKit
 import  CircularSlider
+import Alamofire
+
+
 class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
 
     
@@ -43,11 +46,18 @@ class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
     }
     
     @IBAction func saveWorkout(){
-        
+        self.saveWorkoutToserver()
     }
     
     func saveWorkoutToserver() {
+        let workOutCalorieBurned : Parameters = ["patientId" : 111,"unit" : "calorie", "ObservationDate": self.datePicked?.iso8601  , "CalorieBurned": self.workOutCalorieBurned!]
+        let url = SERVER_PATH + "patient/caloriesBurned"
+
         
+        Alamofire.request(url, method: .post, parameters: workOutCalorieBurned, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+        }
     }
     
     func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {

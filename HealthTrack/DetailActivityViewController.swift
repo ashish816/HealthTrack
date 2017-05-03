@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import Charts
 
 enum SampleType {
     case RunningType
@@ -19,6 +20,102 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
 
     var detailActivitySamples = [HKQuantitySample]()
     var currentDetailSampelType : SampleType = .RunningType
+//    @IBOutlet weak var barView: BarChartView!
+    @IBOutlet weak var barView: LineChartView!
+
+    
+    weak var axisFormatDelegate: IAxisValueFormatter?
+
+    override func viewDidLoad() {
+        axisFormatDelegate = self   
+        updateChartWithData()
+    }
+    
+//    func updateChartWithData() {
+//        var dataEntries: [BarChartDataEntry] = []
+//        let chartVAlues = sampleData()
+//        let axisData = chartVAlues.axisData
+//        let valueData = chartVAlues.valueData
+//        for i in 0..<axisData.count {
+//            let timeIntervalForDate: TimeInterval = axisData[i].timeIntervalSince1970
+//            let dataEntry = BarChartDataEntry(x: Double(i) , y: valueData[i])
+//            dataEntries.append(dataEntry)
+//        }
+//        
+//        var chartDataSet : Any?
+//        if currentDetailSampelType == .RunningType {
+//             chartDataSet = BarChartDataSet(values: dataEntries, label: "Running Data")
+//        }else if currentDetailSampelType == .GlucoseType  {
+//            chartDataSet = BarChartDataSet(values: dataEntries, label: "Glucose data")
+//
+//        }else if currentDetailSampelType == .StepCountType {
+//            chartDataSet = BarChartDataSet(values: dataEntries, label: "Step count")
+//
+//        }
+//        
+//        let chartData = BarChartData(dataSet: chartDataSet as! BarChartDataSet)
+//        barView.data = chartData
+//        
+//        let xaxis = barView.xAxis
+//        xaxis.valueFormatter = axisFormatDelegate
+//    }
+    
+    func updateChartWithData() {
+        var dataEntries: [ChartDataEntry] = []
+        let chartVAlues = sampleData()
+        let axisData = chartVAlues.axisData
+        let valueData = chartVAlues.valueData
+        for i in 0..<axisData.count {
+            let timeIntervalForDate: TimeInterval = axisData[i].timeIntervalSince1970
+            let dataEntry = ChartDataEntry(x: Double(i) , y: valueData[i])
+            dataEntries.append(dataEntry)
+        }
+        
+        var chartDataSet : Any?
+        if currentDetailSampelType == .RunningType {
+            chartDataSet = LineChartDataSet(values: dataEntries, label: "Running Data")
+        }else if currentDetailSampelType == .GlucoseType  {
+            chartDataSet = LineChartDataSet(values: dataEntries, label: "Glucose data")
+            
+        }else if currentDetailSampelType == .StepCountType {
+            chartDataSet = LineChartDataSet(values: dataEntries, label: "Step count")
+            
+        }
+        
+        let chartData = LineChartData(dataSet: chartDataSet as! LineChartDataSet)
+        barView.data = chartData
+        
+        let xaxis = barView.xAxis
+        xaxis.valueFormatter = axisFormatDelegate
+    }
+    
+    func sampleData() -> (axisData : [Date], valueData : [Double]){
+        var axisDataArray = [Date]()
+        var valuesArray = [Double]()
+        
+        for aSample in detailActivitySamples {
+            
+            let workOutSample = aSample 
+            
+            if currentDetailSampelType == .RunningType {
+                valuesArray.append(workOutSample.quantity.doubleValue(for: HKUnit.mile()))
+            }
+            else if currentDetailSampelType == .StepCountType {
+                valuesArray.append(workOutSample.quantity.doubleValue(for: HKUnit.count()))
+            }else if currentDetailSampelType == .GlucoseType {
+                let gramUnit = HKUnit.gram()
+                let volumeUnit = HKUnit.literUnit(with: .deci)
+                let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
+                
+                valuesArray.append(workOutSample.quantity.doubleValue(for: glucoseUnit))
+
+            }
+            
+            let sampleDate = workOutSample.startDate
+            axisDataArray.append(sampleDate)
+        }
+        return (axisDataArray, valuesArray)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return detailActivitySamples.count
@@ -57,4 +154,13 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
         return detailActivityCell
     }
  
+}
+
+extension DetailActivityViewController: IAxisValueFormatter {
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm.ss"
+        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+    }
 }

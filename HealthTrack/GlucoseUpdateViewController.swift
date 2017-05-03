@@ -11,6 +11,8 @@ import HealthKit
 import CircularSlider
 
 
+let  SERVER_PATH = "http://10.0.0.169:9000/"
+
 class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
     
     var datePicked : Date?
@@ -53,7 +55,6 @@ class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
     }
     
     func saveGlucoseSample(glucose:Double, date:Date ) {
-        
         // 1. Create a BMI Sample
         let glucoseType = HKQuantityType.quantityType(forIdentifier: .bloodGlucose)
         
@@ -64,7 +65,6 @@ class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
         let glucoseQuantity = HKQuantity(unit: glucoseUnit, doubleValue: glucose)
         
         let glucoseSample = HKQuantitySample(type: glucoseType!, quantity: glucoseQuantity, start: date, end: date)
-        
         // 2. Save the sample in the store
         healthManager.healthKitStore.save(glucoseSample, withCompletion: { (success, error) -> Void in
             if( error != nil ) {
@@ -80,6 +80,5 @@ class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
         self.currentGlucoseValue = "\(floorf(value))"
         return floorf(value)
     }
-    
 }
 

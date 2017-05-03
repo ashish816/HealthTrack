@@ -10,8 +10,17 @@ import UIKit
 import HealthKit
 import Alamofire
 import FSCalendar
+import CoreLocation
+import CoreMotion
+import SystemConfiguration.CaptiveNetwork
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource{
+class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource,CLLocationManagerDelegate{
+    
+    let locationManager = CLLocationManager()
+    var isFirstRequestFromRange : Bool = false
+    var isFirstRequestOutsideRange : Bool = false
+    var inRangeStatus : String?
+    @IBOutlet var rSSILabel : UILabel!
     
     let healthManager = HealthManager()
     var walkingAvg : Double = 0.0;
@@ -59,6 +68,14 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.activityTableView.reloadData()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    
     
     func authorizeHealthkit() {
         healthManager.authorizeHealthKit { (authorized,  error) -> Void in
@@ -192,10 +209,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func openDatePicker(id : UIButton) {
         self.datePicker.isHidden = false
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.activityTableView.reloadData()
-    }
+
     
     func openProfilePage() {
         
@@ -327,7 +341,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         let activityArray = [activityDic];
         
         let activityData : Parameters = ["patientId" : 111, "activity" : activityArray]
-        Alamofire.request("http://10.0.0.117:9000/patient/activites", method: .post, parameters: activityData, encoding: JSONEncoding.default).response { (response) in
+        let url = SERVER_PATH + "patient/activites"
+        Alamofire.request(url, method: .post, parameters: activityData, encoding: JSONEncoding.default).response { (response) in
             print(response)
             
         }
@@ -335,29 +350,132 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     func syncGlucoseDataForCurrentDate() {
         
-        
         var chosenDateGlucoseSampels = [Any]()
-        
         let gramUnit = HKUnit.gram()
         let volumeUnit = HKUnit.literUnit(with: .deci)
         let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
         
         for aSample in self.glucoseSample {
-        
             let timeSample = ["time" : aSample.startDate.iso8601 , "value" : aSample.quantity
                 .doubleValue(for: glucoseUnit)] as [String : Any]
             
             chosenDateGlucoseSampels.append(timeSample)
-            
         }
 
         let glucoseData : Parameters = ["patientId" : 111,"unit" : "mg/dL", "ObservationDate": self.datePicked?.iso8601 , "glucose": chosenDateGlucoseSampels]
-        Alamofire.request("http://10.0.0.117:9000/patient/glucose", method: .post, parameters: glucoseData, encoding: JSONEncoding.default).response { (response) in
+        let url = SERVER_PATH + "patient/glucose"
+        
+        Alamofire.request(url, method: .post, parameters: glucoseData, encoding: JSONEncoding.default).response { (response) in
             print(response)
             
         }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Failed monitoring region: \(error as NSError).description")
         
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager failed: \(error as NSError).description")
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    
+//                    if UserDefaults.standard.value(forKey: "userid") != nil{
+                        startScanning()
+                        
+//                    }
+                    
+                }
+            }
+        }
+    }
+    
+    
+    func startScanning() {
+        let uuid1 = UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")
+        let beaconRegion1 = CLBeaconRegion(proximityUUID: uuid1!, major: 45605, minor: 37735, identifier: "MyBeacon1")
+        
+        //        let beaconRegion1 = CLBeaconRegion(proximityUUID: uuid1!, identifier: "MyBeacon1")
+        
+        locationManager.startMonitoring(for: beaconRegion1)
+        locationManager.startRangingBeacons(in: beaconRegion1)
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        if let beacons = beacons as? [CLBeacon] {
+            if region.identifier == "MyBeacon1" && beacons.count > 0 {
+                
+                self.title = "RSSI :" + "\(beacons[0].rssi)"
+                
+                if beacons.count > 0 {
+                    self.calculateStrengthAndPlay(beacons[0])
+                }
+            }
+        }
+    }
+    
+    func calculateStrengthAndPlay( _ beacon : CLBeacon) {
+        
+        if beacon.rssi > -70  {
+            self.inRangeStatus = "yes"
+            self.isFirstRequestOutsideRange = false
+            
+            if self.isFirstRequestFromRange {
+                
+                return
+            }
+            
+            self.sendRequest(inrangestatus: self.inRangeStatus!)
+            
+        } else{
+            self.inRangeStatus = "no"
+            self.isFirstRequestFromRange = false
+            
+            if self.isFirstRequestOutsideRange {
+                return
+            }
+            
+            self.sendRequest(inrangestatus: self.inRangeStatus!)
+            
+        }
+    }
+    
+    func sendRequest(inrangestatus : String) {
+        
+        if inrangestatus == "yes"{
+            self.isFirstRequestFromRange = true
+        }
+        else {
+            self.isFirstRequestOutsideRange = true
+        }
+        
+        let beaconData : Parameters = ["name" : "Jessica","id" : 1]
+        let url = SERVER_PATH + "socketEmit"
+        
+        Alamofire.request(url, method: .post, parameters: beaconData, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+        
+        }
+        
+        print(inrangestatus)
+        self.showAlert("Request Sent", message: "In Range: " + inrangestatus)
+    }
+    
+    fileprivate func showAlert(_ title : String, message : String) {
+        let alertController = UIAlertController(title: title as String, message:message as String, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 extension DateFormatter {

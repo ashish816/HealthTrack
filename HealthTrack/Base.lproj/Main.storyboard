@@ -183,8 +183,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="09Z-wh-xIe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="304" width="375" height="314"/>
+                                <color key="backgroundColor" red="0.95021194220000005" green="0.31342532499999998" blue="0.26987863899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailActivityCell" rowHeight="90" id="ws5-WQ-Uha" customClass="DetailActivityCell" customModule="HealthTrack" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
@@ -233,19 +233,32 @@
                                     <outlet property="delegate" destination="vKX-Bb-HUJ" id="bbF-NQ-d5v"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nnt-Uo-NA7" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="64" width="375" height="241"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="241" id="S9J-ew-iAq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="09Z-wh-xIe" firstAttribute="top" secondItem="umv-4u-nJJ" secondAttribute="bottom" id="0HO-gw-exA"/>
+                            <constraint firstAttribute="trailing" secondItem="Nnt-Uo-NA7" secondAttribute="trailing" id="0p2-GJ-FgQ"/>
+                            <constraint firstItem="Nnt-Uo-NA7" firstAttribute="top" secondItem="umv-4u-nJJ" secondAttribute="bottom" id="HE3-kz-nPQ"/>
                             <constraint firstItem="09Z-wh-xIe" firstAttribute="leading" secondItem="vZc-uS-bf2" secondAttribute="leading" id="Hvm-Yn-2Hv"/>
+                            <constraint firstItem="09Z-wh-xIe" firstAttribute="top" secondItem="Nnt-Uo-NA7" secondAttribute="bottom" constant="-1" id="euE-Cz-Und"/>
                             <constraint firstAttribute="trailing" secondItem="09Z-wh-xIe" secondAttribute="trailing" id="fI5-gB-KMe"/>
                             <constraint firstItem="kyd-FJ-Whk" firstAttribute="top" secondItem="09Z-wh-xIe" secondAttribute="bottom" id="og0-bX-tac"/>
+                            <constraint firstItem="Nnt-Uo-NA7" firstAttribute="leading" secondItem="vZc-uS-bf2" secondAttribute="leading" id="wp4-Q4-VI1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="barView" destination="Nnt-Uo-NA7" id="G0W-Hc-20f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h82-9f-R3K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4732" y="180"/>
+            <point key="canvasLocation" x="4732" y="179.46026986506749"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="F18-UZ-rFr">

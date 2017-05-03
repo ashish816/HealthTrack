@@ -8,6 +8,7 @@
 
 import UIKit
 import CircularSlider
+import Alamofire
 
 class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
     
@@ -43,17 +44,19 @@ class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
     }
     
     @IBAction func saveCalorieIntake(){
-        
-        
+        self.saveCalorieIntakeToserver()
     }
     
     func saveCalorieIntakeToserver() {
-        
+        let workOutCalorieBurned : Parameters = ["patientId" : 111,"unit" : "calorie", "ObservationDate": self.datePicked?.iso8601 , "caloriesBurned": self.calorieIntakeValue]
+        Alamofire.request("http://172.20.10.8:9000/patient/caloriesIntake", method: .post, parameters: workOutCalorieBurned, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+        }
     }
     
     func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
         self.calorieIntakeValue = "\(floorf(value))"
         return floorf(value)
     }
-    
+
 }
