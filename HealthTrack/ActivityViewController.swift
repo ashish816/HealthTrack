@@ -254,6 +254,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         return 4
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
@@ -266,9 +267,29 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         cell.separatorInset = UIEdgeInsets(top:10,left:10,bottom:10,right:10)
 
         
+        let gradientLayer = CAGradientLayer()
+        
+        gradientLayer.colors = [UIColor.orange.cgColor, UIColor.red.cgColor]
+//        gradientLayer.locations = [0.4, 1.0]
+        gradientLayer.frame = cell.bounds
+        cell.layer.insertSublayer(gradientLayer, at: 0)
+        
+        
         if indexPath.row == 0 {
+            
+            var myString = NSMutableAttributedString()
+            let myAttribute1 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 24)]
+            
+            let myAttribute2 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 16) ]
+            
+            let myAttrString1 = NSAttributedString(string: "\(self.walkingAvg)", attributes: myAttribute1)
+            let myAttrString2 = NSAttributedString(string: "mi", attributes: myAttribute2)
+            
+            myString.append(myAttrString1)
+            myString.append(myAttrString2)
+            
             cell.activityTypeLabel?.text = "WalkingRunningDistance";
-            cell.activityTypleValue?.text = "\(self.walkingAvg)"
+            cell.activityTypleValue?.attributedText = myString
         }else if indexPath.row == 1{
             cell.activityTypeLabel?.text = "StepCount";
             cell.activityTypleValue?.text = "\(self.totalStepCount)"
