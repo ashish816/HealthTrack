@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let storyBoard = UIStoryboard(name : "Login" , bundle: nil)
+        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginVC")
+        
+        self.window?.rootViewController = loginVC
+        self.window?.makeKeyAndVisible()
+        
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.alert, .sound];
         
@@ -26,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("Something went wrong")
             }
         }
-        
         self.setRemindersForFoodLogging()
 
         return true

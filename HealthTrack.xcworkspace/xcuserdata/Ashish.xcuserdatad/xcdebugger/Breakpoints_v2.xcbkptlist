@@ -90,7 +90,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ViewController.swift"
-                  timestampString = "515279224.569971"
+                  timestampString = "515552135.051335"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -105,7 +105,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ViewController.swift"
-                  timestampString = "515279224.571447"
+                  timestampString = "515552135.052766"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -138,7 +138,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ViewController.swift"
-                  timestampString = "515279224.575019"
+                  timestampString = "515552135.056218"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -153,7 +153,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ViewController.swift"
-                  timestampString = "515279224.576571"
+                  timestampString = "515552135.057687"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -168,7 +168,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ViewController.swift"
-                  timestampString = "515279224.577976"
+                  timestampString = "515552135.059051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -233,7 +233,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.587448"
+                  timestampString = "515552135.068551"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "204"
@@ -248,7 +248,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.588819"
+                  timestampString = "515552135.069934"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "205"
@@ -297,7 +297,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.595413"
+                  timestampString = "515552135.076342"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -312,7 +312,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.59677"
+                  timestampString = "515552135.077737"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -327,7 +327,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.598108"
+                  timestampString = "515552135.079109"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -342,7 +342,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.599455"
+                  timestampString = "515552135.080467"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -439,11 +439,11 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.616282"
+                  timestampString = "515552135.096409"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
                   offsetFromSymbolStart = "632">
                </Location>
                <Location
@@ -454,11 +454,11 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.617798"
+                  timestampString = "515552135.097788"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>
@@ -503,11 +503,11 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.624027"
+                  timestampString = "515552135.104137"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "509"
-                  endingLineNumber = "509"
+                  startingLineNumber = "508"
+                  endingLineNumber = "508"
                   offsetFromSymbolStart = "12">
                </Location>
                <Location
@@ -518,11 +518,11 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.625407"
+                  timestampString = "515552135.105746"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "508"
-                  endingLineNumber = "508"
+                  startingLineNumber = "507"
+                  endingLineNumber = "507"
                   offsetFromSymbolStart = "20">
                </Location>
                <Location
@@ -533,11 +533,11 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.626864"
+                  timestampString = "515552135.10714"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "508"
-                  endingLineNumber = "508"
+                  startingLineNumber = "507"
+                  endingLineNumber = "507"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -630,7 +630,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.641854"
+                  timestampString = "515552135.122459"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -645,7 +645,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.643329"
+                  timestampString = "515552135.123854"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -660,7 +660,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.644681"
+                  timestampString = "515552135.125225"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -675,7 +675,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/GlucoseUpdateViewController.swift"
-                  timestampString = "515279224.646022"
+                  timestampString = "515552135.126572"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -948,7 +948,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.69878"
+                  timestampString = "515552135.173786"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "345"
@@ -963,7 +963,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.70017"
+                  timestampString = "515552135.175161"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "346"
@@ -1028,12 +1028,12 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.709043"
+                  timestampString = "515552135.184216"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "463"
                   endingLineNumber = "463"
-                  offsetFromSymbolStart = "544">
+                  offsetFromSymbolStart = "612">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1043,7 +1043,7 @@
                   moduleName = "HealthTrack"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Ashish/Desktop/CMPE295%20B/Git/HealthTrack/HealthTrack/ActivityViewController.swift"
-                  timestampString = "515279224.710466"
+                  timestampString = "515552135.185596"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "464"
@@ -1051,6 +1051,102 @@
                   offsetFromSymbolStart = "120">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginInputViewController.swift"
+            timestampString = "515485772.648655"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "textFieldShouldBeginEditing(textField:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginInputViewController.swift"
+            timestampString = "515485773.833063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "keyboardWillHide(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginInputViewController.swift"
+            timestampString = "515485776.993992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "keyboardWillShow(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginInputViewController.swift"
+            timestampString = "515486022.650787"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginInputViewController.swift"
+            timestampString = "515555144.540573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "loginClicked(sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LoginInputViewController.swift"
+            timestampString = "515555144.540573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "openHomePageForPatient()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

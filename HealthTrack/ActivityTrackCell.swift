@@ -13,5 +13,4 @@ class ActivityTrackCell: UITableViewCell {
     @IBOutlet weak var activityTypeLabel : UILabel!
     @IBOutlet weak var activityTypleValue : UILabel!
 
-
 }

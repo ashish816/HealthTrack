@@ -24,6 +24,10 @@
 		7588A53D1EAEC58A0079AD5E /* Pizza Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7588A53C1EAEC58A0079AD5E /* Pizza Filled-50.png */; };
 		7588A53F1EAECAD70079AD5E /* WorkOutUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7588A53E1EAECAD70079AD5E /* WorkOutUpdateViewController.swift */; };
 		75E1061E1E68F39B004381B2 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E1061D1E68F39B004381B2 /* HealthManager.swift */; };
+		75E6DC0F1EB990D20022885F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E6DC0E1EB990D20022885F /* LoginViewController.swift */; };
+		75E6DC111EB9A2300022885F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75E6DC101EB9A2300022885F /* Login.storyboard */; };
+		75E6DC131EB9AD990022885F /* LoginInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E6DC121EB9AD990022885F /* LoginInputViewController.swift */; };
+		75E6DC151EB9AE8D0022885F /* GSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E6DC141EB9AE8D0022885F /* GSTextField.swift */; };
 		75F679761E9B62B200915C1C /* MedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F679751E9B62B200915C1C /* MedicationViewController.swift */; };
 		75F679781E9B62F800915C1C /* CalorieIntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */; };
 		85EFEA92EAA03CD1D9D4E807 /* Pods_HealthTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A54A78F7CD00B8A1F861062 /* Pods_HealthTrack.framework */; };
@@ -53,6 +57,10 @@
 		7588A53C1EAEC58A0079AD5E /* Pizza Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pizza Filled-50.png"; sourceTree = "<group>"; };
 		7588A53E1EAECAD70079AD5E /* WorkOutUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkOutUpdateViewController.swift; sourceTree = "<group>"; };
 		75E1061D1E68F39B004381B2 /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
+		75E6DC0E1EB990D20022885F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		75E6DC101EB9A2300022885F /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		75E6DC121EB9AD990022885F /* LoginInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInputViewController.swift; sourceTree = "<group>"; };
+		75E6DC141EB9AE8D0022885F /* GSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSTextField.swift; sourceTree = "<group>"; };
 		75F679751E9B62B200915C1C /* MedicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationViewController.swift; sourceTree = "<group>"; };
 		75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieIntakeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +90,11 @@
 		753A0A6F1E639F020002053C = {
 			isa = PBXGroup;
 			children = (
+				75E6DC121EB9AD990022885F /* LoginInputViewController.swift */,
+				75E6DC101EB9A2300022885F /* Login.storyboard */,
+				75E6DC0E1EB990D20022885F /* LoginViewController.swift */,
 				756315F91EA3EC2F007434BF /* MedicationSample.swift */,
+				75E6DC141EB9AE8D0022885F /* GSTextField.swift */,
 				753A0A7A1E639F020002053C /* HealthTrack */,
 				753A0A791E639F020002053C /* Products */,
 				753A0A8E1E63A4B90002053C /* Frameworks */,
@@ -205,6 +217,7 @@
 				753A0A861E639F020002053C /* LaunchScreen.storyboard in Resources */,
 				753A0A831E639F020002053C /* Assets.xcassets in Resources */,
 				7588A53D1EAEC58A0079AD5E /* Pizza Filled-50.png in Resources */,
+				75E6DC111EB9A2300022885F /* Login.storyboard in Resources */,
 				753A0A811E639F020002053C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,12 +278,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7520789D1E6BB69C002CA84A /* User.swift in Sources */,
+				75E6DC131EB9AD990022885F /* LoginInputViewController.swift in Sources */,
 				756927921E740A1C00F0D0E1 /* UserProfileViewController.swift in Sources */,
 				753037381E7B020A00F5C5C9 /* GlucoseUpdateViewController.swift in Sources */,
+				75E6DC0F1EB990D20022885F /* LoginViewController.swift in Sources */,
 				756315FC1EA6F8FC007434BF /* DetailActivityCell.swift in Sources */,
 				75F679761E9B62B200915C1C /* MedicationViewController.swift in Sources */,
 				756315FA1EA3EC2F007434BF /* MedicationSample.swift in Sources */,
 				75F679781E9B62F800915C1C /* CalorieIntakeViewController.swift in Sources */,
+				75E6DC151EB9AE8D0022885F /* GSTextField.swift in Sources */,
 				753A0A7E1E639F020002053C /* ViewController.swift in Sources */,
 				75E1061E1E68F39B004381B2 /* HealthManager.swift in Sources */,
 				756927901E74081700F0D0E1 /* ActivityViewController.swift in Sources */,
