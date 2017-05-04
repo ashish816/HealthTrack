@@ -12,7 +12,6 @@
 		753A0A7C1E639F020002053C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753A0A7B1E639F020002053C /* AppDelegate.swift */; };
 		753A0A7E1E639F020002053C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753A0A7D1E639F020002053C /* ViewController.swift */; };
 		753A0A811E639F020002053C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753A0A7F1E639F020002053C /* Main.storyboard */; };
-		753A0A831E639F020002053C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753A0A821E639F020002053C /* Assets.xcassets */; };
 		753A0A861E639F020002053C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753A0A841E639F020002053C /* LaunchScreen.storyboard */; };
 		753A0A901E63A4B90002053C /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753A0A8F1E63A4B90002053C /* HealthKit.framework */; };
 		756315F61EA17F76007434BF /* DetailActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756315F51EA17F76007434BF /* DetailActivityViewController.swift */; };
@@ -28,6 +27,8 @@
 		75E6DC111EB9A2300022885F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75E6DC101EB9A2300022885F /* Login.storyboard */; };
 		75E6DC131EB9AD990022885F /* LoginInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E6DC121EB9AD990022885F /* LoginInputViewController.swift */; };
 		75E6DC151EB9AE8D0022885F /* GSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E6DC141EB9AE8D0022885F /* GSTextField.swift */; };
+		75E6DC171EBB105F0022885F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75E6DC161EBB105F0022885F /* Assets.xcassets */; };
+		75E6DC191EBB1A570022885F /* MedicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E6DC181EBB1A570022885F /* MedicationTableViewCell.swift */; };
 		75F679761E9B62B200915C1C /* MedicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F679751E9B62B200915C1C /* MedicationViewController.swift */; };
 		75F679781E9B62F800915C1C /* CalorieIntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */; };
 		85EFEA92EAA03CD1D9D4E807 /* Pods_HealthTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A54A78F7CD00B8A1F861062 /* Pods_HealthTrack.framework */; };
@@ -43,7 +44,6 @@
 		753A0A7B1E639F020002053C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		753A0A7D1E639F020002053C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		753A0A801E639F020002053C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		753A0A821E639F020002053C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		753A0A851E639F020002053C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		753A0A871E639F020002053C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753A0A8D1E63A4B90002053C /* HealthTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthTrack.entitlements; sourceTree = "<group>"; };
@@ -61,6 +61,8 @@
 		75E6DC101EB9A2300022885F /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		75E6DC121EB9AD990022885F /* LoginInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInputViewController.swift; sourceTree = "<group>"; };
 		75E6DC141EB9AE8D0022885F /* GSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSTextField.swift; sourceTree = "<group>"; };
+		75E6DC161EBB105F0022885F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		75E6DC181EBB1A570022885F /* MedicationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationTableViewCell.swift; sourceTree = "<group>"; };
 		75F679751E9B62B200915C1C /* MedicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicationViewController.swift; sourceTree = "<group>"; };
 		75F679771E9B62F800915C1C /* CalorieIntakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalorieIntakeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,11 +115,11 @@
 		753A0A7A1E639F020002053C /* HealthTrack */ = {
 			isa = PBXGroup;
 			children = (
+				75E6DC161EBB105F0022885F /* Assets.xcassets */,
 				753A0A8D1E63A4B90002053C /* HealthTrack.entitlements */,
 				753A0A7B1E639F020002053C /* AppDelegate.swift */,
 				753A0A7D1E639F020002053C /* ViewController.swift */,
 				753A0A7F1E639F020002053C /* Main.storyboard */,
-				753A0A821E639F020002053C /* Assets.xcassets */,
 				7588A53C1EAEC58A0079AD5E /* Pizza Filled-50.png */,
 				753A0A841E639F020002053C /* LaunchScreen.storyboard */,
 				753A0A871E639F020002053C /* Info.plist */,
@@ -132,6 +134,7 @@
 				756315F71EA1826B007434BF /* ActivityTrackCell.swift */,
 				756315FB1EA6F8FC007434BF /* DetailActivityCell.swift */,
 				7588A53E1EAECAD70079AD5E /* WorkOutUpdateViewController.swift */,
+				75E6DC181EBB1A570022885F /* MedicationTableViewCell.swift */,
 			);
 			path = HealthTrack;
 			sourceTree = "<group>";
@@ -215,10 +218,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				753A0A861E639F020002053C /* LaunchScreen.storyboard in Resources */,
-				753A0A831E639F020002053C /* Assets.xcassets in Resources */,
 				7588A53D1EAEC58A0079AD5E /* Pizza Filled-50.png in Resources */,
 				75E6DC111EB9A2300022885F /* Login.storyboard in Resources */,
 				753A0A811E639F020002053C /* Main.storyboard in Resources */,
+				75E6DC171EBB105F0022885F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +296,7 @@
 				756315F61EA17F76007434BF /* DetailActivityViewController.swift in Sources */,
 				753A0A7C1E639F020002053C /* AppDelegate.swift in Sources */,
 				756315F81EA1826B007434BF /* ActivityTrackCell.swift in Sources */,
+				75E6DC191EBB1A570022885F /* MedicationTableViewCell.swift in Sources */,
 				7588A53F1EAECAD70079AD5E /* WorkOutUpdateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

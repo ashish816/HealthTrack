@@ -2,22 +2,24 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Elegant-Iphone-5-Wallpaper-Size.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Elegant-Iphone-5-Wallpaper-Size-1.jpg",
+      "filename" : "Pill_50.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Elegant-Iphone-5-Wallpaper-Size-2.jpg",
+      "filename" : "Pill_75.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "original"
   }
 }

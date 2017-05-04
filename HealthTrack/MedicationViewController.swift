@@ -18,6 +18,9 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Medication"
+
+        
         var medication1 = MedicationSample()
         medication1.medicationName = "med1";
         medication1.medicationTime = "8"
@@ -61,18 +64,29 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.medicationDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var tableCell = tableView.dequeueReusableCell(withIdentifier: "MedicationCell")
+        var tableCell = tableView.dequeueReusableCell(withIdentifier: "MedicationCell") as! MedicationTableViewCell
         
         var medicationSample = self.medicationDetails[indexPath.row] as MedicationSample
         
-        tableCell?.textLabel?.text = medicationSample.medicationName
-        tableCell?.detailTextLabel?.text = medicationSample.medicationTime
+        tableCell.medicationName.text = medicationSample.medicationName
+        tableCell.frequncyLAbel?.text = medicationSample.medicationTime
 
-        return tableCell!
+        return tableCell
+    }
+    
+    fileprivate func showAlert(_ title : String, message : String) {
+        let alertController = UIAlertController(title: title as String, message:message as String, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

@@ -278,11 +278,13 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.row == 0 {
             
             var myString = NSMutableAttributedString()
-            let myAttribute1 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 24)]
+            let myAttribute1 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 32)]
             
             let myAttribute2 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 16) ]
             
-            let myAttrString1 = NSAttributedString(string: "\(self.walkingAvg)", attributes: myAttribute1)
+            let twoDecimalPlaces = String(format: "%.2f", self.walkingAvg)
+            
+            let myAttrString1 = NSAttributedString(string: twoDecimalPlaces, attributes: myAttribute1)
             let myAttrString2 = NSAttributedString(string: "mi", attributes: myAttribute2)
             
             myString.append(myAttrString1)

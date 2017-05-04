@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "QuickR Logo.png",
+      "filename" : "Upload_50-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "QuickR Logo@2x.png",
+      "filename" : "Upload_50-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "QuickR Logo@3x.png",
+      "filename" : "Upload_50.png",
       "scale" : "3x"
     }
   ],
