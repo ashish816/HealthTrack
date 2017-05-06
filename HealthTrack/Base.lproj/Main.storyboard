@@ -162,13 +162,43 @@
                                 <rect key="frame" x="0.0" y="69" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserProfileCell" id="i7Y-bn-ZSy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileCell" id="0xR-03-f7M" customClass="ProfileCell" customModule="HealthTrack" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i7Y-bn-ZSy" id="lUI-3Q-Gjf">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0xR-03-f7M" id="v5O-Fb-bhj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvI-Bq-beu">
+                                                    <rect key="frame" x="122" y="3" width="186" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="mNC-k0-0hS" id="9M3-9X-AgP"/>
+                                                    </connections>
+                                                </textField>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxC-FD-8aL">
+                                                    <rect key="frame" x="22" y="11" width="8" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xvI-Bq-beu" firstAttribute="top" secondItem="v5O-Fb-bhj" secondAttribute="top" constant="5" id="G0D-Bg-oae"/>
+                                                <constraint firstAttribute="trailing" secondItem="xvI-Bq-beu" secondAttribute="trailing" constant="20" id="Hd5-e8-YvY"/>
+                                                <constraint firstItem="UxC-FD-8aL" firstAttribute="leading" secondItem="v5O-Fb-bhj" secondAttribute="leading" constant="20" id="Iha-S4-UkK"/>
+                                                <constraint firstAttribute="bottom" secondItem="UxC-FD-8aL" secondAttribute="bottom" constant="11" id="Jg2-Zb-h1F"/>
+                                                <constraint firstItem="xvI-Bq-beu" firstAttribute="leading" secondItem="UxC-FD-8aL" secondAttribute="trailing" constant="30" id="KX6-DB-8OI"/>
+                                                <constraint firstItem="UxC-FD-8aL" firstAttribute="top" secondItem="v5O-Fb-bhj" secondAttribute="top" constant="11" id="Upb-LL-5n9"/>
+                                                <constraint firstAttribute="bottom" secondItem="xvI-Bq-beu" secondAttribute="bottom" constant="5" id="dhh-3v-VrU"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="metricName" destination="UxC-FD-8aL" id="6AJ-Pz-iM5"/>
+                                            <outlet property="metricValue" destination="xvI-Bq-beu" id="XLt-g4-UaB"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -186,6 +216,9 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yb0-A5-q2H">
                                 <rect key="frame" x="313" y="31" width="46" height="30"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveUserProfileToServer" destination="mNC-k0-0hS" eventType="touchUpInside" id="U76-ZR-gb8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

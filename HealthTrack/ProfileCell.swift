@@ -10,14 +10,8 @@ import UIKit
 
 class ProfileCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet  var metricName : UILabel!
+    @IBOutlet var metricValue : UITextField!
     
-    
-    
-
-
 
 }
