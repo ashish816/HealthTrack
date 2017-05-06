@@ -47,11 +47,12 @@
                                     <segue destination="y04-8c-3VX" kind="show" id="Xe4-9q-JFM"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onj-VQ-OSU">
-                                <rect key="frame" x="34" y="261" width="307" height="144"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onj-VQ-OSU">
+                                <rect key="frame" x="34" y="371" width="307" height="119"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.56445266240000003" green="0.10980392160000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="SPR-G6-jeL" id="Qqh-bS-H7r"/>
@@ -67,9 +68,9 @@
                             <constraint firstItem="AiI-y7-gWR" firstAttribute="top" secondItem="pjk-og-7uO" secondAttribute="bottom" id="ByC-Zf-Mgs"/>
                             <constraint firstItem="onj-VQ-OSU" firstAttribute="leading" secondItem="vZ2-pa-Tvp" secondAttribute="leading" constant="34" id="Cxf-kU-ZAK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FLv-V5-5RP" secondAttribute="trailing" constant="72" id="FHe-O3-oWy"/>
-                            <constraint firstItem="Jb7-db-1NX" firstAttribute="top" secondItem="onj-VQ-OSU" secondAttribute="bottom" constant="95" id="UbG-OR-F7e"/>
+                            <constraint firstItem="Jb7-db-1NX" firstAttribute="top" secondItem="onj-VQ-OSU" secondAttribute="bottom" constant="10" id="UbG-OR-F7e"/>
                             <constraint firstItem="A7n-cz-GeU" firstAttribute="top" secondItem="pjk-og-7uO" secondAttribute="bottom" id="Voe-8N-12E"/>
-                            <constraint firstItem="onj-VQ-OSU" firstAttribute="top" secondItem="pjk-og-7uO" secondAttribute="bottom" constant="241" id="X13-DP-dHI"/>
+                            <constraint firstItem="onj-VQ-OSU" firstAttribute="top" secondItem="pjk-og-7uO" secondAttribute="bottom" constant="351" id="X13-DP-dHI"/>
                             <constraint firstItem="pQ7-l0-EEy" firstAttribute="top" secondItem="A7n-cz-GeU" secondAttribute="bottom" id="Yd1-ht-UIF"/>
                             <constraint firstItem="FLv-V5-5RP" firstAttribute="top" secondItem="Jb7-db-1NX" secondAttribute="bottom" constant="46" id="c4d-gR-CTa"/>
                             <constraint firstAttribute="trailing" secondItem="onj-VQ-OSU" secondAttribute="trailing" constant="34" id="do9-QG-spe"/>
@@ -288,6 +289,6 @@
         <image name="COMPANYBANNER" width="320" height="568"/>
         <image name="Input Text Field " width="260" height="41"/>
         <image name="Login Blue" width="260" height="41"/>
-        <image name="QuickR Logo-1" width="70" height="83"/>
+        <image name="QuickR Logo-1" width="50" height="50"/>
     </resources>
 </document>

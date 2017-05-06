@@ -15,14 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        let storyBoard = UIStoryboard(name : "Login" , bundle: nil)
-//        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginVC")
-//        
-//        self.window?.rootViewController = loginVC
-//        self.window?.makeKeyAndVisible()
+        let storyBoard = UIStoryboard(name : "Login" , bundle: nil)
+        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginVC")
+        
+        self.window?.rootViewController = loginVC
+        self.window?.makeKeyAndVisible()
         
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.alert, .sound];
@@ -41,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func setRemindersForFoodLogging() {
       
         let center = UNUserNotificationCenter.current()
-        
         
         var dateComponents = DateComponents()
         dateComponents.timeZone = TimeZone.current
@@ -68,14 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         })
         
-        
         dateComponents.hour = 13
         dateComponents.minute = 0
         dateComponents.second = 0
         
         let someDateTime1 = userCalendar.date(from: dateComponents)
 
-        
         content.body = "Have you logged your Lunch?"
         let triggerDaily2 = Calendar.current.dateComponents([.hour,.minute,.second,], from: someDateTime1!)
         let trigger2 = UNCalendarNotificationTrigger(dateMatching: triggerDaily2, repeats: true)
@@ -88,8 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 // Something went wrong
             }
         })
-        
-        
         
         dateComponents.hour = 20
         dateComponents.minute = 0
@@ -139,6 +133,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 }
-

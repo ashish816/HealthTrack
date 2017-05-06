@@ -27,8 +27,14 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
     weak var axisFormatDelegate: IAxisValueFormatter?
 
     override func viewDidLoad() {
-        axisFormatDelegate = self   
+        axisFormatDelegate = self
+        self.sortData()
         updateChartWithData()
+    }
+    
+    func sortData() {
+        self.detailActivitySamples.sort(by: {
+        $0.startDate < $1.startDate})
     }
     
 //    func updateChartWithData() {
@@ -67,7 +73,7 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
         let valueData = chartVAlues.valueData
         for i in 0..<axisData.count {
             let timeIntervalForDate: TimeInterval = axisData[i].timeIntervalSince1970
-            let dataEntry = ChartDataEntry(x: Double(i) , y: valueData[i])
+            let dataEntry = ChartDataEntry(x: Double(timeIntervalForDate) , y: valueData[i])
             dataEntries.append(dataEntry)
         }
         
@@ -131,13 +137,13 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
         if self.currentDetailSampelType == .RunningType{
             detailActivityCell.sampleTypeLabel.text = "Running and Walking"
             detailActivityCell.sampleValueLabel.text = "\(CurrentIndexSample.quantity.doubleValue(for: HKUnit.mile()))"
-            detailActivityCell.sampleDateLabel.text = dateFormatter.stringFromDate(date: CurrentIndexSample.startDate)
+            detailActivityCell.sampleDateLabel.text = dateFormatter.timeString(date: CurrentIndexSample.startDate)
             
         }else if self.currentDetailSampelType == .StepCountType {
             
             detailActivityCell.sampleTypeLabel.text = "Step Count"
             detailActivityCell.sampleValueLabel.text = "\(CurrentIndexSample.quantity.doubleValue(for: HKUnit.count()))"
-            detailActivityCell.sampleDateLabel.text = dateFormatter.stringFromDate(date: CurrentIndexSample.startDate)
+            detailActivityCell.sampleDateLabel.text = dateFormatter.timeString(date: CurrentIndexSample.startDate)
             
         }else if self.currentDetailSampelType == .GlucoseType {
             
@@ -148,12 +154,11 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
             
             detailActivityCell.sampleTypeLabel.text = "Gluose Level"
             detailActivityCell.sampleValueLabel.text = "\(CurrentIndexSample.quantity.doubleValue(for: glucoseUnit))"
-            detailActivityCell.sampleDateLabel.text = dateFormatter.stringFromDate(date: CurrentIndexSample.startDate)
+            detailActivityCell.sampleDateLabel.text = dateFormatter.timeString(date: CurrentIndexSample.startDate)
         }
         
         return detailActivityCell
     }
- 
 }
 
 extension DetailActivityViewController: IAxisValueFormatter {

@@ -28,14 +28,14 @@ class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
         
         image1 = image1?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image1, style: UIBarButtonItemStyle.done, target: self, action: #selector(GlucoseUpdateViewController.chooseReadingTIme))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image1, style: UIBarButtonItemStyle.done, target: self, action: #selector(CalorieIntakeViewController.chooseReadingTIme))
         
         
         var image2 = UIImage(named: "upload.png")
         
         image2 = image2?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image2, style: UIBarButtonItemStyle.done, target: self, action: #selector(GlucoseUpdateViewController.saveGlucoseValue))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image2, style: UIBarButtonItemStyle.done, target: self, action: #selector(CalorieIntakeViewController.saveCalorieIntake))
 
 //        self.datePicker.setValue(UIColor.white, forKey: "textColor")
 
@@ -50,13 +50,12 @@ class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
     }
     
     @IBAction func chooseReadingTIme() {
-        self.datePicker.isHidden = false
+        self.datePicker.isHidden = !self.datePicker.isHidden
     }
     
     func datePickerChanged(datePicker:UIDatePicker){
         
         self.datePicked = datePicker.date
-        self.datePicker.isHidden = true
     }
     
     @IBAction func saveCalorieIntake(){
@@ -64,9 +63,15 @@ class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
     }
     
     func saveCalorieIntakeToserver() {
+        if self.datePicked == nil {
+            self.showAlert("Date Missing.", message: "Please provide the time for the record")
+            return
+        }
+        
         let workOutCalorieBurned : Parameters = ["patientId" : 111,"unit" : "calorie", "ObservationDate": self.datePicked?.iso8601 , "caloriesBurned": self.calorieIntakeValue]
         Alamofire.request("http://172.20.10.8:9000/patient/caloriesIntake", method: .post, parameters: workOutCalorieBurned, encoding: JSONEncoding.default).response { (response) in
             print(response)
+            self.showAlert("Successful", message: "Record Saved")
         }
     }
     

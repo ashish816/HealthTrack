@@ -30,14 +30,14 @@ class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
         
         image1 = image1?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image1, style: UIBarButtonItemStyle.done, target: self, action: #selector(GlucoseUpdateViewController.chooseReadingTIme))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image1, style: UIBarButtonItemStyle.done, target: self, action: #selector(WorkOutUpdateViewController.chooseReadingTIme))
         
         
         var image2 = UIImage(named: "upload.png")
         
         image2 = image2?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image2, style: UIBarButtonItemStyle.done, target: self, action: #selector(GlucoseUpdateViewController.saveGlucoseValue))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image2, style: UIBarButtonItemStyle.done, target: self, action: #selector(WorkOutUpdateViewController.saveWorkout))
 
 //        self.datePicker.setValue(UIColor.white, forKey: "textColor")
 
@@ -52,13 +52,12 @@ class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
     }
     
     @IBAction func chooseReadingTIme() {
-        self.datePicker.isHidden = false
+        self.datePicker.isHidden = !self.datePicker.isHidden
     }
     
     func datePickerChanged(datePicker:UIDatePicker){
         
         self.datePicked = datePicker.date
-        self.datePicker.isHidden = true
     }
     
     @IBAction func saveWorkout(){
@@ -66,13 +65,19 @@ class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
     }
     
     func saveWorkoutToserver() {
+        
+        if self.datePicked == nil {
+            self.showAlert("Date Missing.", message: "Please provide the time for the record")
+            return
+        }
+        
         let workOutCalorieBurned : Parameters = ["patientId" : 111,"unit" : "calorie", "ObservationDate": self.datePicked?.iso8601  , "CalorieBurned": self.workOutCalorieBurned!]
         let url = SERVER_PATH + "patient/caloriesBurned"
 
         
         Alamofire.request(url, method: .post, parameters: workOutCalorieBurned, encoding: JSONEncoding.default).response { (response) in
             print(response)
-            
+            self.showAlert("Successful", message: "Record Saved")
         }
     }
     

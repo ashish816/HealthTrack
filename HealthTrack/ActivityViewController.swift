@@ -14,6 +14,7 @@ import CoreLocation
 import CoreMotion
 import SystemConfiguration.CaptiveNetwork
 
+
 class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource,CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
@@ -27,6 +28,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     var totalEnergyBurned: Double = 0;
     var totalStepCount : Double = 0.0;
     var glucoseAverage: Double = 0.0;
+    var totalCalorieConsumed: Double = 0;
     
     @IBOutlet var activityTableView : UITableView!
     @IBOutlet var datePicker : UIDatePicker!
@@ -67,6 +69,49 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.done, target: self, action: #selector(ActivityViewController.openProfilePage))
         
         // Do any additional setup after loading the view.
+    
+    }
+    
+    func fetchCalorieData() {
+//        let calorieParam : Parameters = ["patientid" : "111","date": self.datePicked?.iso8601]
+        let dateString = self.datePicked!.iso8601
+        let url = SERVER_PATH + "patient/calories?"+"patientId=111&date="+"\(dateString)"
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).response { (response) in
+            if let status = response.response?.statusCode {
+                switch(status){
+                case 201:
+                    print("example success")
+                default:
+                    print("error with response status: \(status)")
+                }
+            }
+            //to get JSON return value
+            if let result = response.data {
+                do {
+                    
+                    let parsedData = try JSONSerialization.jsonObject(with: result, options: []) as! [String:Any]
+                    
+                    let calorieDic = parsedData["calories"] as! [String : Any]
+                    let burned = calorieDic["burned"]
+                    let consumed = calorieDic["intake"]
+                    
+                    self.totalEnergyBurned = Double(burned as! Int)
+                    self.totalCalorieConsumed = Double(consumed as! Int)
+
+                    print(parsedData)
+                    
+                    DispatchQueue.main.async { [unowned self] in
+                        self.activityTableView.reloadData()
+                        self.storeValuesToServer()
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+                
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,8 +119,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
-    
-    
     
     func authorizeHealthkit() {
         healthManager.authorizeHealthKit { (authorized,  error) -> Void in
@@ -91,7 +134,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         self.calendarHeightConstraint.constant = bounds.height
@@ -140,7 +182,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 self.walkingAvg = totalWalingForTheDay
                 self.getToatalStepCount(forDate: forDate)
-
             }
             
         })
@@ -251,7 +292,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     
@@ -274,8 +315,11 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         gradientLayer.frame = cell.bounds
         cell.layer.insertSublayer(gradientLayer, at: 0)
         
-        
-        if indexPath.row == 0 {
+         if indexPath.row == 0{
+            cell.activityTypeLabel?.text = "Daily Goal";
+            cell.activityTypleValue?.text = "\(goalForTheDay)"
+        }
+        else if indexPath.row == 1 {
             
             var myString = NSMutableAttributedString()
             let myAttribute1 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 32)]
@@ -292,16 +336,19 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             
             cell.activityTypeLabel?.text = "WalkingRunningDistance";
             cell.activityTypleValue?.attributedText = myString
-        }else if indexPath.row == 1{
+        }else if indexPath.row == 2{
             cell.activityTypeLabel?.text = "StepCount";
             cell.activityTypleValue?.text = "\(self.totalStepCount)"
-        }else if indexPath.row == 2{
+        }else if indexPath.row == 3{
             cell.activityTypeLabel?.text = "CaloriesBurned";
             cell.activityTypleValue?.text = "\(self.totalEnergyBurned)"
             
-        }else if indexPath.row == 3{
+        }else if indexPath.row == 4{
             cell.activityTypeLabel?.text = "GlucoseAverage";
             cell.activityTypleValue?.text = "\(self.glucoseAverage)"
+         }else if indexPath.row == 5{
+            cell.activityTypeLabel?.text = "Calorie Consumed";
+            cell.activityTypleValue?.text = "\(self.totalCalorieConsumed)"
         }
         return cell;
     }
@@ -321,7 +368,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
             else
             {
-                
                 self.glucoseSample = results as! [HKQuantitySample]
                 
                 var glucoseSamples : Double = 0.0;
@@ -333,14 +379,11 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 for aSample in results! {
                     glucoseSamples += aSample.quantity.doubleValue(for: glucoseUnit)
                 }
-                
                 self.glucoseAverage = glucoseSamples/Double((results?.count)!)
+                self.fetchCalorieData()
             }
             
-            DispatchQueue.main.async { [unowned self] in
-                self.activityTableView.reloadData()
-                self.storeValuesToServer()
-            }
+            
             
         })
     }
@@ -501,49 +544,3 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
 }
 
-extension DateFormatter {
-    func stringFromDate(date : Date) -> String{
-        
-        self.dateFormat = "yyyy-MM-ddHH:mm:ss";
-        self.timeZone = TimeZone(abbreviation : "UTC")
-         let dateString = self.string(from: date)
-        return dateString;
-    }
-    
-    func stringFromDateWithCurrentTimeZone(date : Date) -> String {
-        self.dateFormat = "YYYY-MM-DDTHH:mm:ss.sssZ";
-        self.timeZone = TimeZone.current
-        let dateString = self.string(from: date)
-        return dateString;
-    }
-}
-
-extension Date {
-    func midNightDate() -> Date {
-        let cal = Calendar(identifier: .gregorian)
-        let newDate = cal.startOfDay(for: self)
-        return newDate
-    }
-}
-
-extension Formatter {
-    static let iso8601: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-        return formatter
-    }()
-}
-extension Date {
-    var iso8601: String {
-        return Formatter.iso8601.string(from: self)
-    }
-}
-
-extension String {
-    var dateFromISO8601: Date? {
-        return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
-    }
-}

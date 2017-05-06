@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginInputViewController: UIViewController {
+class LoginInputViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var PasswordContainer : UIView!
     @IBOutlet var loginContainer : UIView!
@@ -78,7 +78,7 @@ class LoginInputViewController: UIViewController {
     }
     
     @IBAction func loginClicked(sender : UIButton) {
-        self.currentTextField.resignFirstResponder()
+        self.view.endEditing(true)
         if self.loginField.text == "111" && self.passwordField.text == "pwd"{
             self.openHomePageForPatient()
     }

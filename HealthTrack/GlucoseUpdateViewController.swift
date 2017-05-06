@@ -10,9 +10,6 @@ import UIKit
 import HealthKit
 import CircularSlider
 
-
-let  SERVER_PATH = "http://10.0.0.169:9000/"
-
 class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
     
     var datePicked : Date?
@@ -52,18 +49,20 @@ class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
     }
     
     @IBAction func chooseReadingTIme() {
-        self.datePicker.isHidden = false
-//        self.pickerView.isHidden = false
+        self.datePicker.isHidden = !self.datePicker.isHidden
     }
     
     func datePickerChanged(datePicker:UIDatePicker){
         
         self.datePicked = datePicker.date
-        self.datePicker.isHidden = true
     }
     
     @IBAction func saveGlucoseValue(){
         
+        if self.datePicked == nil {
+            self.showAlert("Date Missing.", message: "Please provide the time for the record")
+            return
+        }
         let glucoseVale = Double(self.currentGlucoseValue!)
         self.saveGlucoseSample(glucose: glucoseVale!,date: self.datePicked!)
     }
@@ -86,6 +85,8 @@ class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
             } else {
                 
                 print("Glucose sample saved successfully!")
+                self.showAlert("Successful", message: "Record Saved")
+
             }
         })
     }

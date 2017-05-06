@@ -17,6 +17,7 @@ class UserProfileViewController: UIViewController, UITableViewDataSource, UITabl
         // Do any additional setup after loading the view.
     }
     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -43,5 +44,9 @@ class UserProfileViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBAction func dismissUserProfile() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveUserProfileToServer() {
+        
     }
 }

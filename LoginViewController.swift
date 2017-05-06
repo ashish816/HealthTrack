@@ -20,13 +20,15 @@ class LoginViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.textView.backgroundColor = UIColor.clear
+        
         self.scrollView.frame = CGRect(x:0, y:0, width:self.view.frame.width, height:self.view.frame.height)
         let scrollViewWidth:CGFloat = self.scrollView.frame.width
         let scrollViewHeight:CGFloat = self.scrollView.frame.height
         //2
         textView.textAlignment = .center
-        textView.text = "Sweettutos.com is your blog of choice for Mobile tutorials"
-        textView.textColor = .black
+        textView.text = "Healthify is the solution for your activity and diabetic tracking."
+//        textView.textColor = .black
         self.startButton.layer.cornerRadius = 4.0
         //3
         let imgOne = UIImageView(frame: CGRect(x:0, y:0,width:scrollViewWidth, height:scrollViewHeight))
@@ -43,6 +45,9 @@ class LoginViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.addSubview(imgThree)
         self.scrollView.addSubview(imgFour)
         //4
+        
+        self.pageControl.numberOfPages = 4
+        
         self.scrollView.contentSize = CGSize(width:self.scrollView.frame.width * 4, height:self.scrollView.frame.height)
         self.scrollView.delegate = self
         self.pageControl.currentPage = 0
@@ -57,11 +62,11 @@ class LoginViewController: UIViewController, UIScrollViewDelegate {
         self.pageControl.currentPage = Int(currentPage);
         // Change the text accordingly
         if Int(currentPage) == 0{
-            textView.text = "Sweettutos.com is your blog of choice for Mobile tutorials"
+            textView.text = "Healthify is the solution for your activity and diabetic tracking."
         }else if Int(currentPage) == 1{
-            textView.text = "I write mobile tutorials mainly targeting iOS"
+            textView.text = "You can choose time and save your records for Food Logging, Workout and Gluscose levels."
         }else if Int(currentPage) == 2{
-            textView.text = "And sometimes I write games tutorials about Unity"
+            textView.text = "Get reminders for medication and logging your activities. "
         }else{
             textView.text = "Keep visiting sweettutos.com for new coming tutorials, and don't forget to subscribe to be notified by email :)"
             // Show the "Let's Start" button in the last slide (with a fade in animation)                     UIView.animate(withDuration: 1.0, animations: { () -> Void in
