@@ -253,7 +253,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="09Z-wh-xIe">
                                 <rect key="frame" x="0.0" y="304" width="375" height="314"/>
-                                <color key="backgroundColor" red="0.95021194220000005" green="0.31342532499999998" blue="0.26987863899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailActivityCell" rowHeight="90" id="ws5-WQ-Uha" customClass="DetailActivityCell" customModule="HealthTrack" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
@@ -406,8 +406,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPj-fj-QNf">
-                                                    <rect key="frame" x="64" y="39" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPj-fj-QNf">
+                                                    <rect key="frame" x="64" y="39" width="211" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbS-tS-7mt">
+                                                    <rect key="frame" x="314" y="40" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -415,10 +421,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Rir-NA-nez" firstAttribute="centerY" secondItem="DgX-Wc-KBa" secondAttribute="centerY" id="8Df-KK-4e1"/>
+                                                <constraint firstItem="LbS-tS-7mt" firstAttribute="leading" secondItem="HPj-fj-QNf" secondAttribute="trailing" constant="39" id="CxA-P3-7hb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="LbS-tS-7mt" secondAttribute="trailing" constant="11" id="HPD-vI-8sP"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="LXm-d4-KwK" secondAttribute="trailing" constant="11" id="QRW-Ug-Ovy"/>
                                                 <constraint firstItem="Rir-NA-nez" firstAttribute="leading" secondItem="DgX-Wc-KBa" secondAttribute="leading" constant="10" id="Vx8-9d-m2r"/>
                                                 <constraint firstItem="HPj-fj-QNf" firstAttribute="leading" secondItem="Rir-NA-nez" secondAttribute="trailing" constant="29" id="aQp-rO-dWm"/>
                                                 <constraint firstItem="HPj-fj-QNf" firstAttribute="top" secondItem="LXm-d4-KwK" secondAttribute="bottom" constant="8" id="afj-jA-jXf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="LbS-tS-7mt" secondAttribute="bottom" constant="0.5" id="kN1-oj-9de"/>
                                                 <constraint firstItem="LXm-d4-KwK" firstAttribute="top" secondItem="DgX-Wc-KBa" secondAttribute="topMargin" constant="2" id="sFQ-KE-xHY"/>
                                                 <constraint firstItem="LXm-d4-KwK" firstAttribute="leading" secondItem="Rir-NA-nez" secondAttribute="trailing" constant="29" id="ueg-KE-Vd1"/>
                                             </constraints>
@@ -427,6 +436,7 @@
                                             <outlet property="frequncyLAbel" destination="HPj-fj-QNf" id="RLX-w7-XNT"/>
                                             <outlet property="medicationName" destination="LXm-d4-KwK" id="Tz7-vf-03X"/>
                                             <outlet property="medicationSign" destination="Rir-NA-nez" id="reE-hd-vdq"/>
+                                            <outlet property="timing" destination="LbS-tS-7mt" id="YfJ-yG-ihf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

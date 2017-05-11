@@ -70,8 +70,9 @@ class WorkOutUpdateViewController: UIViewController,CircularSliderDelegate {
             self.showAlert("Date Missing.", message: "Please provide the time for the record")
             return
         }
-        
-        let workOutCalorieBurned : Parameters = ["patientId" : 111,"unit" : "calorie", "ObservationDate": self.datePicked?.iso8601  , "CalorieBurned": self.workOutCalorieBurned!]
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+
+        let workOutCalorieBurned : Parameters = ["patientId" : loginId!,"unit" : "cal", "ObservationDate": self.datePicked?.iso8601  , "CalorieBurned": self.workOutCalorieBurned!]
         let url = SERVER_PATH + "patient/caloriesBurned"
 
         

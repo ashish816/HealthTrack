@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class UserProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -221,7 +222,25 @@ class UserProfileViewController: UIViewController, UITableViewDataSource, UITabl
             self.currentTextField?.resignFirstResponder()
         }
         
-        var bmi = self.weightInKgs / (self.heighInMeters * self.heighInMeters)
+        let bmi = self.weightInKgs / (self.heighInMeters * self.heighInMeters)
         
+        
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+        
+        let tdHeight = String(format: "%.2f", self.heighInMeters)
+        let tdWeight = String(format: "%.2f", self.weightInKgs)
+        let tdBmi = String(format: "%.2f", bmi)
+
+
+        let wtDic = ["patientId" : loginId!,"height": tdHeight, "heightUnit": "mts","weight": tdWeight , "weightUnit": "Kg","bmi" : tdBmi , "bmiUnit": "kg/m2"] as [String : Any]
+
+        
+        let _ : Parameters = wtDic
+        let url = SERVER_PATH + "patient/profileInfo"
+
+        Alamofire.request(url, method: .post, parameters: wtDic, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+        }
     }
 }

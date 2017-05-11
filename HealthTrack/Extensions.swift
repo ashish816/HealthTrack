@@ -9,8 +9,11 @@
 import Foundation
 
 let goalForTheDay = 1200
-let  SERVER_PATH = "http://10.0.0.117:9000/"
+//let  SERVER_PATH = "http://10.0.0.117:9000/"
 //let  SERVER_PATH = "http://10.250.216.12:9000/"
+//let  SERVER_PATH = "http://ec2-35-161-81-114.us-west-2.compute.amazonaws.com:9000/"
+let  SERVER_PATH = "http://ec2-35-161-81-114.us-west-2.compute.amazonaws.com:9000/"
+
 
 extension DateFormatter {
     func stringFromDate(date : Date) -> String{
@@ -58,6 +61,7 @@ extension Formatter {
         return formatter
     }()
 }
+
 extension Date {
     var iso8601: String {
         return Formatter.iso8601.string(from: self)

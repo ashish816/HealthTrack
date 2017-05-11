@@ -1049,9 +1049,6 @@
 					07C004EE9675A950E771D1109A09AE79 = {
 						LastSwiftMigration = 0830;
 					};
-					58F8527E74F83232A1EF0C9675CF627E = {
-						LastSwiftMigration = 0830;
-					};
 					79C040AFDDCE1BCBF6D8B5EB0B85887F = {
 						LastSwiftMigration = 0830;
 					};
@@ -1349,7 +1346,6 @@
 				PRODUCT_NAME = FSCalendar;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1617,7 +1613,6 @@
 				PRODUCT_NAME = FSCalendar;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

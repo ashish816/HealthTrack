@@ -67,9 +67,10 @@ class CalorieIntakeViewController: UIViewController,CircularSliderDelegate {
             self.showAlert("Date Missing.", message: "Please provide the time for the record")
             return
         }
-        
-        let workOutCalorieBurned : Parameters = ["patientId" : 111,"unit" : "calorie", "ObservationDate": self.datePicked?.iso8601 , "caloriesBurned": self.calorieIntakeValue]
-        Alamofire.request("http://172.20.10.8:9000/patient/caloriesIntake", method: .post, parameters: workOutCalorieBurned, encoding: JSONEncoding.default).response { (response) in
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+        let workOutCalorieIntake : Parameters = ["patientId" : loginId!,"unit" : "cal", "ObservationDate": self.datePicked?.iso8601 , "calorieIntake": self.calorieIntakeValue]
+         let url = SERVER_PATH + "patient/caloriesIntake"
+        Alamofire.request(url, method: .post, parameters: workOutCalorieIntake, encoding: JSONEncoding.default).response { (response) in
             print(response)
             self.showAlert("Successful", message: "Record Saved")
         }

@@ -14,5 +14,4 @@ class DetailActivityCell: UITableViewCell {
     @IBOutlet var sampleValueLabel : UILabel!
     @IBOutlet var sampleDateLabel : UILabel!
 
-
 }

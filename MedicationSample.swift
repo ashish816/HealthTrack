@@ -12,5 +12,6 @@ class MedicationSample: NSObject {
     
     var medicationName : String?
     var medicationTime : String?
+    var dosage : String?
 
 }

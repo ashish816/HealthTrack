@@ -64,11 +64,11 @@ class LoginViewController: UIViewController, UIScrollViewDelegate {
         if Int(currentPage) == 0{
             textView.text = "Healthify is the solution for your activity and diabetic tracking."
         }else if Int(currentPage) == 1{
-            textView.text = "You can choose time and save your records for Food Logging, Workout and Gluscose levels."
+            textView.text = "Save your glucose level, Calorie consumption and calorie burned."
         }else if Int(currentPage) == 2{
             textView.text = "Get reminders for medication and logging your activities. "
         }else{
-            textView.text = "Keep visiting sweettutos.com for new coming tutorials, and don't forget to subscribe to be notified by email :)"
+            textView.text = "Get prediction for medication, readmission status and glucose level. "
             // Show the "Let's Start" button in the last slide (with a fade in animation)                     UIView.animate(withDuration: 1.0, animations: { () -> Void in
             self.startButton.alpha = 1.0
         }

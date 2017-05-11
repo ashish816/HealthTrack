@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginInputViewController: UIViewController, UITextFieldDelegate {
     
@@ -65,7 +66,6 @@ class LoginInputViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
         self.currentTextField = textField
-        
         if self.currentTextField.isFirstResponder {
             self.currentTextField.resignFirstResponder()
         }
@@ -79,15 +79,35 @@ class LoginInputViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginClicked(sender : UIButton) {
         self.view.endEditing(true)
-        if self.loginField.text == "111" && self.passwordField.text == "pwd"{
-            self.openHomePageForPatient()
-    }
+        let activityDic = ["email" : self.loginField.text] as [String : Any]
+        let loginDic = ["data" : activityDic]
+        
+        let activityData : Parameters = activityDic
+        let url = SERVER_PATH + "doctor/loginCheck"
+        Alamofire.request(url, method: .post, parameters: loginDic, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+            if let result = response.data {
+                do {
+                    let parsedData = try JSONSerialization.jsonObject(with: result, options: []) as! [String:Any]
+                    
+                    UserDefaults.standard.set(parsedData["id"], forKey: "userid")
+                    UserDefaults.standard.set(parsedData["name"], forKey: "username")
+
+                    DispatchQueue.main.async { [unowned self] in
+                        self.openHomePageForPatient()
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }
     }
         
     func openHomePageForPatient() {
         let storyBoard = UIStoryboard(name : "Main", bundle : nil)
         let tabBarVC = storyBoard.instantiateInitialViewController()
-        
         self.view.window?.rootViewController = tabBarVC
     }
 }

@@ -14,6 +14,8 @@ enum SampleType {
     case RunningType
     case StepCountType
     case GlucoseType
+    case CalorieBurned
+    case CalorieConsumed
 }
 
 class DetailActivityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -77,14 +79,16 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
             dataEntries.append(dataEntry)
         }
         
-        var chartDataSet : Any?
+        var chartDataSet : LineChartDataSet?
         if currentDetailSampelType == .RunningType {
             chartDataSet = LineChartDataSet(values: dataEntries, label: "Running Data")
         }else if currentDetailSampelType == .GlucoseType  {
-            chartDataSet = LineChartDataSet(values: dataEntries, label: "Glucose data")
+            chartDataSet = LineChartDataSet(values: dataEntries, label: "Glucose data") as LineChartDataSet
+            chartDataSet?.circleColors = [NSUIColor.red]
             
         }else if currentDetailSampelType == .StepCountType {
             chartDataSet = LineChartDataSet(values: dataEntries, label: "Step count")
+            chartDataSet?.circleColors = [NSUIColor.green]
             
         }
         
@@ -93,6 +97,8 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
         
         let xaxis = barView.xAxis
         xaxis.valueFormatter = axisFormatDelegate
+        
+        barView.animate(xAxisDuration: 2)
     }
     
     func sampleData() -> (axisData : [Date], valueData : [Double]){
@@ -101,8 +107,7 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
         
         for aSample in detailActivitySamples {
             
-            let workOutSample = aSample 
-            
+            let workOutSample = aSample
             if currentDetailSampelType == .RunningType {
                 valuesArray.append(workOutSample.quantity.doubleValue(for: HKUnit.mile()))
             }
@@ -136,13 +141,18 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
         
         if self.currentDetailSampelType == .RunningType{
             detailActivityCell.sampleTypeLabel.text = "Running and Walking"
-            detailActivityCell.sampleValueLabel.text = "\(CurrentIndexSample.quantity.doubleValue(for: HKUnit.mile()))"
+            let twoDecimalPlaces = String(format: "%.2f", CurrentIndexSample.quantity.doubleValue(for: HKUnit.mile()))
+            
+            detailActivityCell.sampleValueLabel.text = twoDecimalPlaces
             detailActivityCell.sampleDateLabel.text = dateFormatter.timeString(date: CurrentIndexSample.startDate)
             
         }else if self.currentDetailSampelType == .StepCountType {
             
             detailActivityCell.sampleTypeLabel.text = "Step Count"
-            detailActivityCell.sampleValueLabel.text = "\(CurrentIndexSample.quantity.doubleValue(for: HKUnit.count()))"
+            let twoDecimalPlaces = String(format: "%.2f", CurrentIndexSample.quantity.doubleValue(for: HKUnit.count()))
+            
+            detailActivityCell.sampleValueLabel.text = twoDecimalPlaces
+            
             detailActivityCell.sampleDateLabel.text = dateFormatter.timeString(date: CurrentIndexSample.startDate)
             
         }else if self.currentDetailSampelType == .GlucoseType {
@@ -152,8 +162,11 @@ class DetailActivityViewController: UIViewController, UITableViewDataSource, UIT
             let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
             
             
+            let twoDecimalPlaces = String(format: "%.2f", CurrentIndexSample.quantity.doubleValue(for: glucoseUnit))
+            
+            detailActivityCell.sampleValueLabel.text = twoDecimalPlaces
+            
             detailActivityCell.sampleTypeLabel.text = "Gluose Level"
-            detailActivityCell.sampleValueLabel.text = "\(CurrentIndexSample.quantity.doubleValue(for: glucoseUnit))"
             detailActivityCell.sampleDateLabel.text = dateFormatter.timeString(date: CurrentIndexSample.startDate)
         }
         

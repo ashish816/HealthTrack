@@ -1,3 +1,4 @@
+
 //
 //  ActivityViewController.swift
 //  HealthTrack
@@ -73,9 +74,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func fetchCalorieData() {
-//        let calorieParam : Parameters = ["patientid" : "111","date": self.datePicked?.iso8601]
         let dateString = self.datePicked!.iso8601
-        let url = SERVER_PATH + "patient/calories?"+"patientId=111&date="+"\(dateString)"
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+        let url = SERVER_PATH + "patient/calories?"+"patientId=\(loginId!)&date="+"\(dateString)"
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).response { (response) in
             if let status = response.response?.statusCode {
@@ -86,30 +87,27 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                     print("error with response status: \(status)")
                 }
             }
-            //to get JSON return value
             if let result = response.data {
                 do {
                     
                     let parsedData = try JSONSerialization.jsonObject(with: result, options: []) as! [String:Any]
                     
                     let calorieDic = parsedData["calories"] as! [String : Any]
-                    let burned = calorieDic["burned"]
-                    let consumed = calorieDic["intake"]
-                    
-                    self.totalEnergyBurned = Double(burned as! Int)
-                    self.totalCalorieConsumed = Double(consumed as! Int)
+                    self.totalEnergyBurned = Double(calorieDic["burned"] as! Int)
+                    self.totalCalorieConsumed = Double(calorieDic["intake"] as! Int)
 
+                    
                     print(parsedData)
                     
                     DispatchQueue.main.async { [unowned self] in
                         self.activityTableView.reloadData()
-                        self.storeValuesToServer()
                     }
                     
                 } catch let error as NSError {
                     print(error)
                 }
-                
+                self.storeValuesToServer()
+
             }
         }
     }
@@ -263,17 +261,22 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             let destination = segue.destination as! DetailActivityViewController
             let indexPath = sender as! IndexPath
             if indexPath.row == 0{
+               
+            }else if indexPath.row == 1{
                 destination.detailActivitySamples = self.runningWalkingSample
                 destination.currentDetailSampelType = .RunningType
-            }else if indexPath.row == 1{
-                destination.detailActivitySamples = self.stepCountSample
-                destination.currentDetailSampelType = .StepCountType
 
             }else if indexPath.row == 2{
+                destination.detailActivitySamples = self.stepCountSample
+                destination.currentDetailSampelType = .StepCountType
                 
             }else if indexPath.row == 3{
+                
+            }else if indexPath.row == 4{
                 destination.detailActivitySamples = self.glucoseSample
                 destination.currentDetailSampelType = .GlucoseType
+            }else if indexPath.row == 5{
+                
             }
             
         }else{
@@ -316,47 +319,67 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         cell.layer.insertSublayer(gradientLayer, at: 0)
         
          if indexPath.row == 0{
+            let attribuetdString = self.attributedstringForRow(value: Double(goalForTheDay), unit: "cal")
             cell.activityTypeLabel?.text = "Daily Goal";
             cell.activityTypleValue?.text = "\(goalForTheDay)"
+            cell.activityTypleValue?.attributedText = attribuetdString
         }
         else if indexPath.row == 1 {
             
-            var myString = NSMutableAttributedString()
-            let myAttribute1 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 32)]
-            
-            let myAttribute2 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 16) ]
-            
-            let twoDecimalPlaces = String(format: "%.2f", self.walkingAvg)
-            
-            let myAttrString1 = NSAttributedString(string: twoDecimalPlaces, attributes: myAttribute1)
-            let myAttrString2 = NSAttributedString(string: "mi", attributes: myAttribute2)
-            
-            myString.append(myAttrString1)
-            myString.append(myAttrString2)
-            
+            let attribuetdString = self.attributedstringForRow(value: self.walkingAvg, unit: "mi")
             cell.activityTypeLabel?.text = "WalkingRunningDistance";
-            cell.activityTypleValue?.attributedText = myString
+            cell.activityTypleValue?.attributedText = attribuetdString
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+
         }else if indexPath.row == 2{
+            let attribuetdString = self.attributedstringForRow(value: self.totalStepCount, unit: "steps")
             cell.activityTypeLabel?.text = "StepCount";
-            cell.activityTypleValue?.text = "\(self.totalStepCount)"
+//            cell.activityTypleValue?.text = "\(self.totalStepCount)"
+            cell.activityTypleValue?.attributedText = attribuetdString
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+
         }else if indexPath.row == 3{
+            let attribuetdString = self.attributedstringForRow(value: self.totalEnergyBurned, unit: "cal")
             cell.activityTypeLabel?.text = "CaloriesBurned";
-            cell.activityTypleValue?.text = "\(self.totalEnergyBurned)"
+            cell.activityTypleValue?.attributedText = attribuetdString
             
         }else if indexPath.row == 4{
+            let attribuetdString = self.attributedstringForRow(value: self.glucoseAverage, unit: "mg/dl")
             cell.activityTypeLabel?.text = "GlucoseAverage";
-            cell.activityTypleValue?.text = "\(self.glucoseAverage)"
+            cell.activityTypleValue?.attributedText = attribuetdString
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+
          }else if indexPath.row == 5{
+            let attribuetdString = self.attributedstringForRow(value: self.totalCalorieConsumed, unit: "cal")
             cell.activityTypeLabel?.text = "Calorie Consumed";
-            cell.activityTypleValue?.text = "\(self.totalCalorieConsumed)"
+            cell.activityTypleValue?.attributedText = attribuetdString
         }
         return cell;
     }
     
+    func attributedstringForRow(value: Double, unit: String) -> NSAttributedString {
+        var myString = NSMutableAttributedString()
+        let myAttribute1 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 32)]
+        
+        let myAttribute2 = [ NSFontAttributeName: UIFont.systemFont(ofSize: 16) ]
+        
+        let twoDecimalPlaces = String(format: "%.2f", value)
+        
+        let myAttrString1 = NSAttributedString(string: twoDecimalPlaces, attributes: myAttribute1)
+        let myAttrString2 = NSAttributedString(string: unit, attributes: myAttribute2)
+        
+        myString.append(myAttrString1)
+        myString.append(myAttrString2)
+        
+        return myString
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        self.performSegue(withIdentifier: "ActivityToDetailActivity", sender: indexPath)
+        
+        if indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 4 {
+            self.performSegue(withIdentifier: "ActivityToDetailActivity", sender: indexPath)
+   
+        }
     }
     
     func getGlucoseData(forDate: Date) {
@@ -379,11 +402,20 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 for aSample in results! {
                     glucoseSamples += aSample.quantity.doubleValue(for: glucoseUnit)
                 }
-                self.glucoseAverage = glucoseSamples/Double((results?.count)!)
+                
+                if results?.count == 0 {
+                    self.glucoseAverage = 0
+ 
+                }else {
+                    self.glucoseAverage = glucoseSamples/Double((results?.count)!)
+                }
+                
+                DispatchQueue.main.async { [unowned self] in
+                    self.activityTableView.reloadData()
+                }
+                
                 self.fetchCalorieData()
             }
-            
-            
             
         })
     }
@@ -397,16 +429,20 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //        }
         
         self.syncAtcivityForCurrentDate()
-        self.syncGlucoseDataForCurrentDate()
+//        self.syncGlucoseDataForCurrentDate()
     }
     
     func syncAtcivityForCurrentDate() {
         
-        let activityDic = ["WalkingRunningDistance" : self.walkingAvg, "StepCount" : self.totalStepCount , "Date" : self.datePicked?.iso8601] as [String : Any]
+        let twoDecimalPlaces = String(format: "%.2f", self.walkingAvg)
+        let walkingAvg = Double(twoDecimalPlaces)
+
+        let activityDic = ["WalkingRunningDistance" : walkingAvg, "StepCount" : self.totalStepCount , "Date" : self.datePicked?.iso8601] as [String : Any]
         
         let activityArray = [activityDic];
-        
-        let activityData : Parameters = ["patientId" : 111, "activity" : activityArray]
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+
+        let activityData : Parameters = ["patientId" : loginId!, "activity" : activityArray]
         let url = SERVER_PATH + "patient/activites"
         Alamofire.request(url, method: .post, parameters: activityData, encoding: JSONEncoding.default).response { (response) in
             print(response)
@@ -416,25 +452,25 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     func syncGlucoseDataForCurrentDate() {
         
-        var chosenDateGlucoseSampels = [Any]()
-        let gramUnit = HKUnit.gram()
-        let volumeUnit = HKUnit.literUnit(with: .deci)
-        let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
-        
-        for aSample in self.glucoseSample {
-            let timeSample = ["time" : aSample.startDate.iso8601 , "value" : aSample.quantity
-                .doubleValue(for: glucoseUnit)] as [String : Any]
-            
-            chosenDateGlucoseSampels.append(timeSample)
-        }
+//        var chosenDateGlucoseSampels = [Any]()
+//        let gramUnit = HKUnit.gram()
+//        let volumeUnit = HKUnit.literUnit(with: .deci)
+//        let glucoseUnit = gramUnit.unitDivided(by: volumeUnit)
+//        
+//        for aSample in self.glucoseSample {
+//            let timeSample = ["time" : aSample.startDate.iso8601 , "value" : aSample.quantity
+//                .doubleValue(for: glucoseUnit)] as [String : Any]
+//            
+//            chosenDateGlucoseSampels.append(timeSample)
+//        }
 
-        let glucoseData : Parameters = ["patientId" : 111,"unit" : "mg/dL", "ObservationDate": self.datePicked?.iso8601 , "glucose": chosenDateGlucoseSampels]
-        let url = SERVER_PATH + "patient/glucose"
-        
-        Alamofire.request(url, method: .post, parameters: glucoseData, encoding: JSONEncoding.default).response { (response) in
-            print(response)
-            
-        }
+//        let glucoseData : Parameters = ["patientId" : 111,"unit" : "mg/dL", "ObservationDate": self.datePicked?.iso8601 , "glucose": chosenDateGlucoseSampels]
+//        let url = SERVER_PATH + "patient/glucose"
+//        
+//        Alamofire.request(url, method: .post, parameters: glucoseData, encoding: JSONEncoding.default).response { (response) in
+//            print(response)
+//            
+//        }
     }
     
     
@@ -452,23 +488,15 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         if status == .authorizedAlways {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
-                    
-//                    if UserDefaults.standard.value(forKey: "userid") != nil{
-                        startScanning()
-                        
-//                    }
-                    
+                    startScanning()
                 }
             }
         }
     }
     
-    
     func startScanning() {
         let uuid1 = UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")
         let beaconRegion1 = CLBeaconRegion(proximityUUID: uuid1!, major: 45605, minor: 37735, identifier: "MyBeacon1")
-        
-        //        let beaconRegion1 = CLBeaconRegion(proximityUUID: uuid1!, identifier: "MyBeacon1")
         
         locationManager.startMonitoring(for: beaconRegion1)
         locationManager.startRangingBeacons(in: beaconRegion1)
@@ -490,15 +518,13 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     func calculateStrengthAndPlay( _ beacon : CLBeacon) {
         
-        if beacon.rssi > -70  {
+        if beacon.rssi > -80  {
             self.inRangeStatus = "yes"
             self.isFirstRequestOutsideRange = false
             
             if self.isFirstRequestFromRange {
-                
                 return
             }
-            
             self.sendRequest(inrangestatus: self.inRangeStatus!)
             
         } else{
@@ -509,7 +535,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 return
             }
             
-            self.sendRequest(inrangestatus: self.inRangeStatus!)
+           // self.sendRequest(inrangestatus: self.inRangeStatus!)
             
         }
     }
@@ -518,21 +544,24 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         
         if inrangestatus == "yes"{
             self.isFirstRequestFromRange = true
+            
+            let loginId = UserDefaults.standard.value(forKey: "userid")
+            let username = UserDefaults.standard.value(forKey: "username")
+            
+            let beaconData : Parameters = ["name" : username!,"id" : loginId!]
+            let url = SERVER_PATH + "socketEmit"
+            
+            Alamofire.request(url, method: .post, parameters: beaconData, encoding: JSONEncoding.default).response { (response) in
+                print(response)
+                
+            }
+            
+            print(inrangestatus)
+            self.showAlert("Request Sent", message: "In Range: " + inrangestatus)
         }
         else {
             self.isFirstRequestOutsideRange = true
         }
-        
-        let beaconData : Parameters = ["name" : "Jessica","id" : 1]
-        let url = SERVER_PATH + "socketEmit"
-        
-        Alamofire.request(url, method: .post, parameters: beaconData, encoding: JSONEncoding.default).response { (response) in
-            print(response)
-        
-        }
-        
-        print(inrangestatus)
-        self.showAlert("Request Sent", message: "In Range: " + inrangestatus)
     }
     
     fileprivate func showAlert(_ title : String, message : String) {
@@ -541,6 +570,5 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    
 }
 

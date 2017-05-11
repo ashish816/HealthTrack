@@ -13,6 +13,6 @@ class MedicationTableViewCell: UITableViewCell {
     @IBOutlet weak var medicationSign  :UIImageView!
     @IBOutlet weak var frequncyLAbel : UILabel!
     @IBOutlet weak var medicationName : UILabel!
-    
+    @IBOutlet weak var timing : UILabel!
 
 }

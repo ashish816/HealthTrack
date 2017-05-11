@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import Alamofire
 
 class MedicationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,23 +21,52 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.title = "Medication"
 
-        
-        var medication1 = MedicationSample()
-        medication1.medicationName = "med1";
-        medication1.medicationTime = "8"
-        
-        var medication2 = MedicationSample()
-        medication2.medicationName = "med2";
-        medication2.medicationTime = "13"
-        
-        var medication3 = MedicationSample()
-        medication3.medicationName = "med3";
-        medication3.medicationTime = "19"
-        
-        self.medicationDetails = [medication1, medication2, medication3]
-        
         self.createNotificationsForMedicine()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.fetchmedicationDetails()
+    }
+    
+    func fetchmedicationDetails() {
+        
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+        let wtDic = ["data" : "\(loginId!)"] as [String : Any]
+        
+        let userInfo : Parameters = wtDic
+        let url = SERVER_PATH + "doctor/patientMedications"
+        
+        Alamofire.request(url, method: .post, parameters: userInfo, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+            if let result = response.data {
+                do {
+                    
+                    let parsedData = try JSONSerialization.jsonObject(with: result, options: []) as! [Any]
+                    
+                    var medications = [MedicationSample]()
+                    for aObject in parsedData {
+                    
+                        var medicalrecord = aObject as? Dictionary<String, String>
+                        let medicationSample = MedicationSample()
+                        medicationSample.medicationName = medicalrecord?["name"]
+                        medicationSample.dosage = medicalrecord?["dosage"]
+                        medicationSample.medicationTime = medicalrecord?["timing"]
+                        
+                        medications.append(medicationSample)
+                    }
+                    
+                    self.medicationDetails = medications
+                    DispatchQueue.main.async { [unowned self] in
+                        self.medicationtableView.reloadData()
+                    }
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
+        }
     }
     
     func createNotificationsForMedicine(){
@@ -61,7 +91,6 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
                 // Something went wrong
             }
         })
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -78,7 +107,8 @@ class MedicationViewController: UIViewController, UITableViewDelegate, UITableVi
         var medicationSample = self.medicationDetails[indexPath.row] as MedicationSample
         
         tableCell.medicationName.text = medicationSample.medicationName
-        tableCell.frequncyLAbel?.text = medicationSample.medicationTime
+        tableCell.frequncyLAbel?.text = medicationSample.dosage
+        tableCell.timing?.text = medicationSample.medicationTime
 
         return tableCell
     }

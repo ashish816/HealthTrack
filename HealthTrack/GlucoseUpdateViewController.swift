@@ -9,6 +9,7 @@
 import UIKit
 import HealthKit
 import CircularSlider
+import Alamofire
 
 class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
     
@@ -65,6 +66,20 @@ class GlucoseUpdateViewController: UIViewController,CircularSliderDelegate {
         }
         let glucoseVale = Double(self.currentGlucoseValue!)
         self.saveGlucoseSample(glucose: glucoseVale!,date: self.datePicked!)
+        self.syncGlucoseData()
+    }
+    
+    func syncGlucoseData() {
+        
+        let loginId = UserDefaults.standard.value(forKey: "userid")
+
+        let glucoseData : Parameters = ["patientId" : loginId!,"unit" : "mg/dL", "ObservationDate": self.datePicked?.iso8601 , "glucose": self.currentGlucoseValue]
+        let url = SERVER_PATH + "patient/glucose"
+        
+        Alamofire.request(url, method: .post, parameters: glucoseData, encoding: JSONEncoding.default).response { (response) in
+            print(response)
+            
+        }
     }
     
     func saveGlucoseSample(glucose:Double, date:Date ) {

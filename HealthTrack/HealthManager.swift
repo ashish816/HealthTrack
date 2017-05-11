@@ -62,21 +62,15 @@ class HealthManager: NSObject {
     
     func readRunningWorkOuts(forDate : Date?,_ completion: (([AnyObject]?, NSError?) -> Void)!) {
         
-        
         let chosenDate = forDate != nil ? forDate! : Date();
-        
         let startDate = chosenDate.midNightDate()
-
-//        let startDate = Date()
         let endDate = startDate.addingTimeInterval(24*60*60)
         
         let predicate = HKQuery.predicateForSamples(withStart: startDate as Date, end: endDate as Date, options: [.strictStartDate])
         let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
-        
         let distanceSampleType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!;
         
-
         let sampleQuery = HKSampleQuery(sampleType: distanceSampleType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor])
             
             
@@ -162,17 +156,8 @@ class HealthManager: NSObject {
     
     func readGlucoseSamples(forDate : Date?,_ completion: (([AnyObject]?, NSError?) -> Void)!) {
         
-        
-        
         let chosenDate = forDate != nil ? forDate! : Date();
-        
-        print(chosenDate);
-        
         let startDate = chosenDate.midNightDate()
-        
-        print(chosenDate);
-
-        //        let startDate = Date()
         let endDate = startDate.addingTimeInterval(24*60*60)
         
          let predicate = HKQuery.predicateForSamples(withStart: startDate as Date, end: endDate as Date, options: [.strictStartDate])
@@ -194,8 +179,6 @@ class HealthManager: NSObject {
                 
             }
         }
-        
-        // Don't forget to execute the Query!
         healthKitStore.execute(stepsSampleQuery)
         
     }
